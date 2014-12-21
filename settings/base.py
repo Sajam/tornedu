@@ -18,6 +18,13 @@ THREADS = 0  # Forks one process per CPU.
 
 APPS = [
     'index',
+    'user',
 ]
 
 URLS = []
+
+DATABASES = {
+    'default': {
+        'connection_string': 'sqlite:///:memory:'
+    }
+}
