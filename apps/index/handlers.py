@@ -1,4 +1,4 @@
-from tornado.web import RequestHandler
+from core.web import RequestHandler
 
 
 class IndexHandler(RequestHandler):

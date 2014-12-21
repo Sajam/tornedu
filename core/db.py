@@ -1,4 +1,5 @@
 from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 from core.conf import Settings
 
 
@@ -13,6 +14,7 @@ class Db(object):
         return Db._instance
 
     def __init__(self):
+        self.session = sessionmaker()
         self.connection_name = None
         self.connection_settings = None
         self.engine = None
@@ -24,5 +26,6 @@ class Db(object):
             self.connection_settings['connection_string'],
             **self.connection_settings['kwargs']
         )
+        self.session.configure(bind=self.engine)
 
         return self
