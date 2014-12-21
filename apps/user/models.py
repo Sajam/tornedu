@@ -8,8 +8,5 @@ class User(Base):
     name = Column(String(length=30))
     password = Column(String(length=32))
 
-    def login(self):
-        print 'LOGIN . . .'
-
     def __repr__(self):
         return '<User(id={}, name={})>'.format(self.id, self.name)

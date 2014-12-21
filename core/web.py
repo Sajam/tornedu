@@ -10,3 +10,7 @@ class RequestHandler(tornado.web.RequestHandler):
 
     def on_finish(self):
         self.db.commit()
+
+    def get_template_namespace(self):
+        namespace = super(RequestHandler, self).get_template_namespace()
+        return namespace

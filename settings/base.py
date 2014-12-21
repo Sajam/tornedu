@@ -11,7 +11,8 @@ APP = {
     'static_path': STATIC_PATH,
     'template_path': TEMPLATE_PATH,
     'cookie_secret': 'm/]*EqjW;K-B6fxObtb[]*)gQ%kVhr+Y7h}^J*]}$3Z&@9vuuE8,Fvihkdk>ek?',
-    'xsrf_cookies': True
+    'xsrf_cookies': True,
+    'login_url': '/user/login',
 }
 
 THREADS = 0  # Forks one process per CPU.
