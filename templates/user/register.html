@@ -1,0 +1,9 @@
+{% extends "../base.html" %}
+
+{% block content %}
+    <form action="{{ reverse_url('user_register') }}" method="post">
+        {% module xsrf_form_html() %}
+        {% raw register_form %}
+        <input type="submit" value="Zarejestruj się">
+    </form>
+{% end %}

@@ -29,3 +29,5 @@ DATABASES = {
         'connection_string': 'sqlite:///:memory:'
     }
 }
+
+MESSAGE_TYPES = ('success', 'info', 'warning', 'error', )

@@ -9,8 +9,7 @@ class Base(object):
     def exists(cls, *criterion):
         return bool(cls.db.query(cls).filter(*criterion).count())
 
-    @classmethod
-    def save(cls):
-        cls.db.add(cls)
+    def save(self):
+        Base.db.add(self)
 
 Base = declarative_base(cls=Base)

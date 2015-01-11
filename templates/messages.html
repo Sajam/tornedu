@@ -1,0 +1,9 @@
+{% for message_type in messages %}
+    {% if messages[message_type] %}
+        <ul class="messages {{ message_type }}">
+            {% for message in messages[message_type] %}
+                <li>{{ message }}</li>
+            {% end %}
+        </ul>
+    {% end %}
+{% end %}
