@@ -1,6 +1,18 @@
 from core.forms import *
 
 
+class LoginForm(Form):
+    fields = [
+        TextField('name', validators=[RequiredValidator]),
+        PasswordField('password', validators=[RequiredValidator])
+    ]
+
+    labels = {
+        'name': 'Name',
+        'password': 'Password'
+    }
+
+
 class RegisterForm(Form):
     fields = [
         TextField('name', validators=[

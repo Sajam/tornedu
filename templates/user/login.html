@@ -3,16 +3,7 @@
 {% block content %}
     <form action="{{ reverse_url('user_login') }}" method="post">
         {% module xsrf_form_html() %}
-        <div>
-            <label for="name">Name:</label>
-            <input type="text" name="name" id="name">
-        </div>
-        <div>
-            <label for="password">Password:</label>
-            <input type="password" name="password" id="password">
-        </div>
-        <div>
-            <input type="submit" value="Login">
-        </div>
+        {% raw login_form %}
+        <input type="submit" value="Login">
     </form>
 {% end %}
