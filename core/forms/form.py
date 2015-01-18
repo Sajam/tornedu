@@ -1,3 +1,4 @@
+import os
 from compiler.ast import flatten
 from tornado.template import Loader
 from core.conf import Settings
@@ -5,7 +6,9 @@ from core.conf import Settings
 
 class Form(object):
     # Form's fields defined in subclasses.
-    fields = {}
+    fields = []
+    labels = {}
+    templates_path = os.path.join(Settings.TEMPLATE_PATH, 'form')
     template = 'form.html'
     display_all_errors_for_field = False
 
@@ -26,8 +29,10 @@ class Form(object):
         return self.errors_list if len(self.errors_list) else False
 
     def render(self):
-        return Loader(Settings.TEMPLATE_PATH).load(self.template).generate(
-            fields=self.fields
+        return Loader(self.templates_path).load(self.template).generate(
+            form=self,
+            fields=self.fields,
+            labels=self.labels
         )
 
     def __repr__(self):

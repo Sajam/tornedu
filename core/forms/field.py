@@ -1,7 +1,10 @@
 from compiler.ast import flatten
+from tornado.template import Loader
 
 
 class FormField(object):
+    template = 'fields/basic.html'
+
     def __init__(self, name, *args, **kwargs):
         self.form = None
         self.name = name
@@ -33,6 +36,12 @@ class FormField(object):
     def errors(self):
         return (self.errors_list if self.get_option('display_all_errors_for_field') else self.errors_list[0]) \
             if len(self.errors_list) else False
+
+    def render_base(self):
+        return Loader(self.form.templates_path).load(self.template).generate(
+            form=self.form,
+            field=self
+        )
 
     # Subclasses should implement this method and return form field's HTML.
     def render(self):

@@ -19,3 +19,11 @@ class RegisterForm(Form):
             CheckedValidator, EqualsValidator('yes')
         ])
     ]
+
+    labels = {
+        'name': 'Name',
+        'email': 'E-Mail',
+        'password': 'Password',
+        'password_confirm': 'Confirm password',
+        'rules': 'Accept rules'
+    }

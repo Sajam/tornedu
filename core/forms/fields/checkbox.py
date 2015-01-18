@@ -2,6 +2,8 @@ from ..field import FormField
 
 
 class CheckboxField(FormField):
+    template = 'fields/checkbox.html'
+
     def __init__(self, name, checkbox_value, *args, **kwargs):
         super(CheckboxField, self).__init__(name, checkbox_value=checkbox_value, *args, **kwargs)
 
