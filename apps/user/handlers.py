@@ -36,11 +36,11 @@ class RegisterHandler(RequestHandler):
 
     def post(self, *args, **kwargs):
         form = RegisterForm(self.request.body_arguments)
-        if form.errors():
-            self.messages.add_many('error', form.errors())
-        else:
+        if form.validate():
             # Create user.
             pass
+        else:
+            self.messages.error(form.errors)
 
         self.render(self.template, **{
             'register_form': form

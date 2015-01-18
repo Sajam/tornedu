@@ -1,4 +1,6 @@
 from .required import ValidatorRequired
 from .length import ValidatorLength
-from .same_as import ValidatorSameAs
+from .email import ValidatorEmail
+from .equal_fields import ValidatorEqualFields
 from .checked import ValidatorChecked
+from .equals import ValidatorEquals

@@ -2,14 +2,15 @@ from .base import FormFieldBase
 
 
 class FormFieldCheckbox(FormFieldBase):
-    type = 'checkbox'
+    def __init__(self, name, checkbox_value, *args, **kwargs):
+        super(FormFieldCheckbox, self).__init__(name, checkbox_value=checkbox_value, *args, **kwargs)
 
     def render(self):
         return '<input type="checkbox" name="{}" value="{}" {}>'.format(
-            self.field_name,
-            self.field_options['value'],
+            self.name,
+            self.checkbox_value,
             'checked' if self.is_checked() else ''
         )
 
     def is_checked(self):
-        return self.form.values and self.form.values.get(self.field_name) == self.field_value
+        return self.value == self.checkbox_value

@@ -9,4 +9,4 @@ class ValidatorRequired(ValidatorBase):
 
     @property
     def error(self):
-        return 'Field {} is required.'.format(self.field_name)
+        return 'Field {} is required.'.format(self.field.name)

@@ -2,32 +2,46 @@ from .filters import ValidatorFilters
 
 
 class ValidatorBase(object):
-    form = None
+    # In subclasses you can specify list of filters applied before validation.
     filters = []
     defined_filters = ValidatorFilters.filters()
 
-    def __init__(self, field_name=None, field_options=None, value=None, **kwargs):
-        self.kwargs = kwargs
+    def __init__(self, *args, **kwargs):
+        self.args = args
+        self.field = None
+        self.form = None
+        self.value = None
+        self.errors_list = []
 
-        if field_name and field_options:
-            self.lazy_init(field_name, field_options, value)
+        for name, value in kwargs.iteritems():
+            setattr(self, name, value)
 
-    def lazy_init(self, field_name, field_options, value):
-        self.field_name = field_name
-        self.field_options = field_options
-        self.original_value = value
-        self.value = value
+    def prepare(self, field):
+        self.field = field
+        self.form = self.field.form
+        self.value = self.field.value
+        self.errors_list = []
 
-        for validator_filter in self.filters:
-            if validator_filter in self.defined_filters.keys():
-                self.value = self.defined_filters[validator_filter](self.value)
+        for filter in self.filters:
+            self.value = self.defined_filters[filter](self.value)
 
-    def prepare(self):
-        pass
+        return self
 
+    def validate_base(self):
+        if not self.validate() and not len(self.errors_list):
+            self.errors_list = [self.error]
+
+        return not bool(len(self.errors_list))
+
+    # Subclasses should implement this method and check if value is valid.
     def validate(self):
         raise NotImplementedError()
 
+    # Subclasses can override this property to set default error message if validation fails.
     @property
-    def default_error(self):
-        return 'Value {} for field is not valid.'.format(self.original_value, self.field_name)
+    def error(self):
+        return 'Field {} is not valid.'.format(self.field.name)
+
+    @property
+    def errors(self):
+        return self.errors_list if len(self.errors_list) else False

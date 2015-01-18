@@ -25,16 +25,16 @@ class Messages(object):
 
             # Creating and binding class instance function with message type name.
             def func(cls, message_content, message_type=type_name):
-                cls.append_message(message_type, message_content)
+                if isinstance(message_content, basestring):
+                    message_content = [message_content]
+
+                for message in message_content:
+                    cls.append_message(message_type, message)
 
             setattr(self, type_name, MethodType(func, self))
 
     def append_message(self, message_type, message_content):
         self.messages[message_type].append(message_content)
-
-    def add_many(self, message_type, messages):
-        for message in messages:
-            self.messages[message_type].append(message)
 
     def get_all(self):
         return self.messages
