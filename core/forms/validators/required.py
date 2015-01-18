@@ -1,7 +1,7 @@
-from .base import ValidatorBase
+from ..validator import Validator
 
 
-class ValidatorRequired(ValidatorBase):
+class RequiredValidator(Validator):
     filters = ['strip', ]
 
     def validate(self):

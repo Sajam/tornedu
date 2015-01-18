@@ -1,7 +1,7 @@
-from .base import ValidatorBase
+from ..validator import Validator
 
 
-class ValidatorChecked(ValidatorBase):
+class CheckedValidator(Validator):
     def validate(self):
         return bool(self.form.values.get(self.field.name))
 

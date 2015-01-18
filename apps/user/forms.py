@@ -3,19 +3,19 @@ from core.forms import *
 
 class RegisterForm(Form):
     fields = [
-        FormFieldText('name', validators=[
-            ValidatorRequired, ValidatorLength(min=3, max=50)
+        TextField('name', validators=[
+            RequiredValidator, LengthValidator(min=3, max=50)
         ]),
-        FormFieldText('email', validators=[
-            ValidatorRequired, ValidatorEmail
+        TextField('email', validators=[
+            RequiredValidator, EmailValidator
         ]),
-        FormFieldPassword('password', validators=[
-            ValidatorRequired
+        PasswordField('password', validators=[
+            RequiredValidator
         ]),
-        FormFieldPassword('password_confirm', validators=[
-            ValidatorEqualFields('password')
+        PasswordField('password_confirm', validators=[
+            EqualFieldsValidator('password')
         ]),
-        FormFieldCheckbox('rules', 'yes', validators=[
-            ValidatorChecked, ValidatorEquals('yes')
+        CheckboxField('rules', 'yes', validators=[
+            CheckedValidator, EqualsValidator('yes')
         ])
     ]

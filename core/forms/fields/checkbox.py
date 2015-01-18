@@ -1,9 +1,9 @@
-from .base import FormFieldBase
+from ..field import FormField
 
 
-class FormFieldCheckbox(FormFieldBase):
+class CheckboxField(FormField):
     def __init__(self, name, checkbox_value, *args, **kwargs):
-        super(FormFieldCheckbox, self).__init__(name, checkbox_value=checkbox_value, *args, **kwargs)
+        super(CheckboxField, self).__init__(name, checkbox_value=checkbox_value, *args, **kwargs)
 
     def render(self):
         return '<input type="checkbox" name="{}" value="{}" {}>'.format(

@@ -1,7 +1,7 @@
 from compiler.ast import flatten
 
 
-class FormFieldBase(object):
+class FormField(object):
     def __init__(self, name, *args, **kwargs):
         self.form = None
         self.name = name

@@ -1,8 +1,8 @@
 from lepl.apps.rfc3696 import Email
-from .base import ValidatorBase
+from ..validator import Validator
 
 
-class ValidatorEmail(ValidatorBase):
+class EmailValidator(Validator):
     filters = ['strip', ]
 
     def validate(self):

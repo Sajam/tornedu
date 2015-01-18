@@ -1,7 +1,7 @@
-from .base import ValidatorBase
+from ..validator import Validator
 
 
-class ValidatorEqualFields(ValidatorBase):
+class EqualFieldsValidator(Validator):
     def validate(self):
         return self.value == self.field.form.values.get(self.args[0])
 

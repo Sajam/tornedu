@@ -1,4 +1,3 @@
-from .base import FormFieldBase
-from .text import FormFieldText
-from .password import FormFieldPassword
-from .checkbox import FormFieldCheckbox
+from .text import TextField
+from .password import PasswordField
+from .checkbox import CheckboxField

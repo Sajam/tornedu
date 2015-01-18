@@ -1,6 +1,6 @@
-from .base import FormFieldBase
+from ..field import FormField
 
 
-class FormFieldPassword(FormFieldBase):
+class PasswordField(FormField):
     def render(self):
         return '<input type="password" name="{}">'.format(self.name)

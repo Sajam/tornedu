@@ -1,10 +1,10 @@
-from .filters import ValidatorFilters
+from .filters import Filters
 
 
-class ValidatorBase(object):
+class Validator(object):
     # In subclasses you can specify list of filters applied before validation.
     filters = []
-    defined_filters = ValidatorFilters.filters()
+    defined_filters = Filters.filters()
 
     def __init__(self, *args, **kwargs):
         self.args = args

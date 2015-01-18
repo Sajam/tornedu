@@ -1,7 +1,7 @@
-from .base import ValidatorBase
+from ..validator import Validator
 
 
-class ValidatorLength(ValidatorBase):
+class LengthValidator(Validator):
     filters = ['strip', ]
 
     def validate(self):
@@ -13,7 +13,6 @@ class ValidatorLength(ValidatorBase):
     @property
     def error(self):
         if getattr(self, 'min') and getattr(self, 'max'):
-            print 'min & max'
             return 'Value length for field {} can be in range {}-{}.'.format(
                 self.field.name, self.min, self.max)
 

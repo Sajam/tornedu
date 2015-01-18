@@ -1,6 +1,6 @@
-from .base import FormFieldBase
+from ..field import FormField
 
 
-class FormFieldText(FormFieldBase):
+class TextField(FormField):
     def render(self):
         return '<input type="text" name="{}" value="{}">'.format(self.name, self.value)
