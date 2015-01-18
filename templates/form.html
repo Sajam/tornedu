@@ -1,0 +1,6 @@
+{% for field in fields %}
+    <div class="row">
+        <div class="name">{{ field.name }}</div>
+        <div class="field">{% raw field.render() %}</div>
+    </div>
+{% end %}

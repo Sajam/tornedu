@@ -1,9 +1,12 @@
 from compiler.ast import flatten
+from tornado.template import Loader
+from core.conf import Settings
 
 
 class Form(object):
     # Form's fields defined in subclasses.
     fields = {}
+    template = 'form.html'
     display_all_errors_for_field = False
 
     def __init__(self, values=None):
@@ -23,12 +26,9 @@ class Form(object):
         return self.errors_list if len(self.errors_list) else False
 
     def render(self):
-        result = ''
-
-        for field in self.fields:
-            result += field.render()
-
-        return result
+        return Loader(Settings.TEMPLATE_PATH).load(self.template).generate(
+            fields=self.fields
+        )
 
     def __repr__(self):
         return self.render()
