@@ -1,0 +1,134 @@
+@import 'variables';
+
+header {
+  position: relative;
+  height: 50px;
+  line-height: 50px;
+  background: $themeBlue;
+  padding: 0 5vw;
+  width: calc(100vw - 10vw);
+
+  a.logo {
+    float: left;
+    display: block;
+    height: inherit;
+    line-height: inherit;
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    text-transform: uppercase;
+    text-shadow: 1px 1px #444;
+  }
+
+  ul.header-navigation {
+    position: absolute;
+    left: calc(5vh + 200px);
+    float: left;
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 10px;
+
+    li {
+      float: left;
+      width: auto;
+
+      &:nth-child(n+1) {
+        background-color: $color1;
+      }
+
+      &:nth-child(n+2) {
+        background-color: $color2;
+      }
+
+      &:nth-child(n+3) {
+        background-color: $color3;
+      }
+
+      &:nth-child(n+4) {
+        background-color: $color4;
+      }
+
+      a {
+        display: block;
+        height: 100%;
+        color: #fff;
+        padding: 0 25px;
+        text-shadow: 1px 1px #999;
+
+        &:hover {
+          position: relative;
+          height: calc(100% - 5px);
+          border-bottom: 5px solid $themeBlue;
+        }
+      }
+    }
+  }
+
+  .user {
+    position: absolute;
+    float: left;
+    top: 0;
+    right: 5vw;
+    padding: 0 25px;
+    cursor: pointer;
+    width: 200px;
+
+    &.popover-open {
+      background: $color4;
+    }
+
+    .silhouette {
+      float: left;
+      position: relative;
+      width: 50px;
+      height: 50px;
+
+      img {
+        position: absolute;
+        top: 15%;
+        width: 70%;
+        height: 70%;
+        border-radius: 50px;
+      }
+    }
+
+    p.name {
+      float: left;
+      color: #fff;
+      width: calc(250px - 25px - 25px - 50px);
+      height: 50px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .user-popover {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 5vw;
+    width: 250px;
+    background: $color1;
+    border-bottom: 5px solid $color3;
+
+    ul.user-navigation {
+      text-align: center;
+
+      li {
+        display: block;
+        color: #fff;
+        line-height: 40px;
+
+        &:hover {
+          background: $color2;
+        }
+
+        a {
+          display: block;
+          color: inherit;
+        }
+      }
+    }
+  }
+}
