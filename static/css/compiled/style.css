@@ -113,4 +113,43 @@ header {
   padding: 0 5vw;
   width: calc(100vw - 5vw - 5vw); }
 
+form {
+  width: 400px;
+  display: inline-block;
+  margin: 10px;
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px; }
+  form .row {
+    display: block;
+    margin-bottom: 10px; }
+    form .row .field[data-type="checkbox"] label {
+      display: inline; }
+      form .row .field[data-type="checkbox"] label:after {
+        content: ""; }
+    form .row label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 14px; }
+      form .row label:after {
+        content: ":"; }
+    form .row input[type="text"], form .row input[type="password"] {
+      margin: 0;
+      padding: 5px 10px;
+      outline: none;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      width: calc(100% - 20px); }
+  form input[type="submit"] {
+    float: right;
+    margin: 10px 0;
+    background-color: #A3A948;
+    border: 1px solid #84893C;
+    border-radius: 7px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 5px 10px;
+    text-shadow: 1px 1px #555; }
+
 /*# sourceMappingURL=style.css.map */

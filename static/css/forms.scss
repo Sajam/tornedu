@@ -1,0 +1,57 @@
+form {
+  width: 400px;
+  display: inline-block;
+  margin: 10px;
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+
+  .row {
+    display: block;
+    margin-bottom: 10px;
+
+    .field {
+      &[data-type="checkbox"] {
+        label {
+          display: inline;
+
+          &:after {
+            content: "";
+          }
+        }
+      }
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 14px;
+
+      &:after {
+        content: ":";
+      }
+    }
+
+    input[type="text"], input[type="password"] {
+      margin: 0;
+      padding: 5px 10px;
+      outline: none;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      width: calc(100% - 20px);
+    }
+  }
+
+  input[type="submit"] {
+    float: right;
+    margin: 10px 0;
+    background-color: #A3A948;
+    border: 1px solid #84893C;
+    border-radius: 7px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 5px 10px;
+    text-shadow: 1px 1px #555;
+  }
+}
