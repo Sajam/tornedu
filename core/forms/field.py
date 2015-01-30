@@ -1,11 +1,16 @@
 from compiler.ast import flatten
+from bs4 import BeautifulSoup
 from tornado.template import Loader
 
 
 class FormField(object):
+    id = 0
     template = 'fields/basic.html'
 
     def __init__(self, name, *args, **kwargs):
+        FormField.id += 1
+
+        self.id = 'field-{}'.format(FormField.id)
         self.form = None
         self.name = name
         self.initial_value = None
@@ -38,10 +43,15 @@ class FormField(object):
             if len(self.errors_list) else False
 
     def render_base(self):
-        return Loader(self.form.templates_path).load(self.template).generate(
+        html = BeautifulSoup(Loader(self.form.templates_path).load(self.template).generate(
             form=self.form,
             field=self
-        )
+        ))
+
+        for field_html in html.find_all('input'):
+            field_html['id'] = self.id
+
+        return html
 
     # Subclasses should implement this method and return form field's HTML.
     def render(self):
