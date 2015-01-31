@@ -1,4 +1,7 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from core.forms import *
+from apps.user.models import User
 
 
 class LoginForm(Form):
@@ -8,8 +11,8 @@ class LoginForm(Form):
     ]
 
     labels = {
-        'name': 'Name',
-        'password': 'Password'
+        'name': 'Nazwa użytkownika',
+        'password': 'Hasło'
     }
 
 
@@ -32,10 +35,20 @@ class RegisterForm(Form):
         ])
     ]
 
+    @register_validator('name')
+    def name_available_validator(self):
+        if User.exists(User.name == self.values.get('name')):
+            self.add_error('Wybrana nazwa użytkownika jest zajęta.')
+
+    @register_validator('email')
+    def email_available_validator(self):
+        if User.exists(User.email == self.values.get('email')):
+            self.add_error('Podany adres e-mail znajduje się już w naszej bazie danych.')
+
     labels = {
-        'name': 'Name',
+        'name': 'Nazwa użytkownika',
         'email': 'E-Mail',
-        'password': 'Password',
-        'password_confirm': 'Confirm password',
-        'rules': 'Accept rules'
+        'password': 'Hasło',
+        'password_confirm': 'Potwierdź hasło',
+        'rules': 'Akceptuję regulamin'
     }
