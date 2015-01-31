@@ -37,7 +37,17 @@ class Messages(object):
         self.messages[message_type].append(message_content)
 
     def get_all(self):
-        return self.messages
+        return self.messages if self.is_there_any_messages() else None
+
+    def is_there_any_messages(self):
+        any_messages = False
+
+        for message_type, messages in self.messages.iteritems():
+            if len(messages):
+                any_messages = True
+                break
+
+        return any_messages
 
     def clear(self, type_name=None):
         if type_name:

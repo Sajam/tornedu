@@ -111,12 +111,15 @@ header {
 
 .content {
   padding: 0 5vw;
-  width: calc(100vw - 5vw - 5vw); }
+  width: calc(100vw - 5vw - 5vw);
+  text-align: center; }
+  .content * {
+    text-align: left; }
 
 form {
   width: 400px;
   display: inline-block;
-  margin: 10px;
+  margin: 10px auto;
   padding: 10px 20px;
   border: 1px solid #ccc;
   border-radius: 10px; }
@@ -147,9 +150,68 @@ form {
     border: 1px solid #84893C;
     border-radius: 7px;
     color: #fff;
-    font-size: 16px;
+    font-size: 14px;
+    letter-spacing: 0.5px;
     font-weight: bold;
     padding: 5px 10px;
-    text-shadow: 1px 1px #555; }
+    text-shadow: 1px 1px #555;
+    text-transform: uppercase;
+    cursor: pointer; }
+    form input[type="submit"]:hover {
+      background-color: #CE1836;
+      border: 1px solid #af152e; }
+
+.messages-container {
+  margin: 20px auto 0 auto; }
+  .messages-container div {
+    text-align: center; }
+  .messages-container .type {
+    position: relative;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 7px;
+    margin-bottom: 20px; }
+    .messages-container .type.error {
+      background-color: rgba(255, 0, 0, 0.05);
+      border: 1px solid rgba(255, 100, 93, 0.87); }
+      .messages-container .type.error i {
+        color: rgba(255, 118, 112, 0.99); }
+    .messages-container .type.info {
+      background-color: rgba(0, 158, 255, 0.06);
+      border: 1px solid #009eff; }
+      .messages-container .type.info i {
+        color: #009eff; }
+    .messages-container .type.warning {
+      background-color: rgba(255, 255, 0, 0.03);
+      border: 1px solid #ffae00; }
+      .messages-container .type.warning i {
+        color: #ffae00; }
+    .messages-container .type.success {
+      background-color: rgba(0, 128, 0, 0.03);
+      border: 1px solid rgba(0, 128, 0, 0.69); }
+      .messages-container .type.success i {
+        color: rgba(0, 128, 0, 0.69); }
+    .messages-container .type i {
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      font-size: 24px;
+      background: #fff; }
+    .messages-container .type .messages {
+      font-size: 14px;
+      padding-left: 5px;
+      line-height: 21px; }
+      .messages-container .type .messages.multiple {
+        margin-left: 15px; }
+        .messages-container .type .messages.multiple li:before {
+          content: '\25A0';
+          display: block;
+          position: relative;
+          max-width: 0;
+          max-height: 0;
+          left: -15px;
+          top: -1px;
+          color: #A0A0A0;
+          font-size: 11px; }
 
 /*# sourceMappingURL=style.css.map */

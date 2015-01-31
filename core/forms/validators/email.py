@@ -11,4 +11,4 @@ class EmailValidator(Validator):
 
     @property
     def error(self):
-        return '{} is not valid e-mail.'.format(self.value if len(self.value) else '(blank)')
+        return '"{}" is not a valid e-mail.'.format(self.value if len(self.value) else '(blank)')

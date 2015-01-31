@@ -1,7 +1,7 @@
 form {
   width: 400px;
   display: inline-block;
-  margin: 10px;
+  margin: 10px auto;
   padding: 10px 20px;
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -49,9 +49,17 @@ form {
     border: 1px solid #84893C;
     border-radius: 7px;
     color: #fff;
-    font-size: 16px;
+    font-size: 14px;
+    letter-spacing: 0.5px;
     font-weight: bold;
     padding: 5px 10px;
     text-shadow: 1px 1px #555;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $color1;
+      border: 1px solid #af152e;
+    }
   }
 }

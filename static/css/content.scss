@@ -1,4 +1,9 @@
 .content {
   padding: 0 5vw;
   width: calc(100vw - 5vw - 5vw);
+  text-align: center;
+
+  * {
+    text-align: left;
+  }
 }

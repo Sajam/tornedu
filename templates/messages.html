@@ -1,9 +1,28 @@
-{% for message_type in messages %}
-    {% if messages[message_type] %}
-        <ul class="messages {{ message_type }}">
-            {% for message in messages[message_type] %}
-                <li>{{ message }}</li>
+{% if messages %}
+    <div class="messages-container">
+        {% for message_type in messages %}
+            {% if messages[message_type] %}
+                <div>
+                    <div class="type {{ message_type }}">
+                        {% if message_type == 'error' %}
+                            <i class="fa fa-times-circle"></i>
+                        {% elif message_type == 'info' %}
+                            <i class="fa fa-info-circle"></i>
+                        {% elif message_type == 'warning' %}
+                            <i class="fa fa-exclamation-circle"></i>
+                        {% elif message_type == 'success' %}
+                            <i class="fa fa-check-circle"></i>
+                        {% end %}
+
+                        <ul class="messages {{ message_type }}
+                                   {{ 'multiple' if len(messages[message_type]) > 1 else '' }}">
+                            {% for message in messages[message_type] %}
+                                <li>{{ message }}</li>
+                            {% end %}
+                        </ul>
+                    </div>
+                </div>
             {% end %}
-        </ul>
-    {% end %}
+        {% end %}
+    </div>
 {% end %}
