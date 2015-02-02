@@ -40,6 +40,10 @@ class Form(object):
 
         return not bool(len(self.errors_list))
 
+    def clear(self):
+        self.values = {}
+        self.errors_list = []
+
     def add_error(self, error_message):
         self.errors_list += [error_message]
 

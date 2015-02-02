@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from ..validator import Validator
 
 
@@ -7,4 +9,4 @@ class CheckedValidator(Validator):
 
     @property
     def error(self):
-        return 'Field {} is not checked.'.format(self.field.name)
+        return 'Pole {} nie jest zaznaczone.'.format(self.field.display_name)

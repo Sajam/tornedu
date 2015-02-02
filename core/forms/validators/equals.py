@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from ..validator import Validator
 
 
@@ -7,4 +9,4 @@ class EqualsValidator(Validator):
 
     @property
     def error(self):
-        return 'Field {} has incorrect value.'.format(self.field.name)
+        return 'Pole {} ma niepoprawną wartość.'.format(self.field.display_name)

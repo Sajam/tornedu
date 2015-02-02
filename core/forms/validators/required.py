@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from ..validator import Validator
 
 
@@ -9,4 +11,4 @@ class RequiredValidator(Validator):
 
     @property
     def error(self):
-        return 'Field {} is required.'.format(self.field.name)
+        return 'Pole {} jest wymagane.'.format(self.field.display_name)

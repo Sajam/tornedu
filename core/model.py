@@ -4,10 +4,19 @@ from sqlalchemy import Column, Integer, String, DateTime, func
 
 class SQLExtensions(object):
     @classmethod
+    def get(cls, *criterion):
+        return cls.db.query(cls).filter(*criterion).one()
+
+    @classmethod
     def exists(cls, *criterion):
         return bool(cls.db.query(cls).filter(*criterion).count())
 
     def save(self):
+        for method_name in dir(self):
+            method = getattr(self, method_name)
+            if hasattr(method, 'run_before_save'):
+                setattr(self, getattr(method, 'run_before_save'), method())
+
         Base.db.add(self)
 
 
@@ -23,6 +32,14 @@ class Base(SQLExtensions):
         return cls.__name__.lower()
 
     id = Column(Integer, primary_key=True)
+
+
+def before_save(field_name):
+    def wrapper(before_field_save_function):
+        before_field_save_function.run_before_save = field_name
+        return before_field_save_function
+
+    return wrapper
 
 
 Base = declarative_base(cls=Base)

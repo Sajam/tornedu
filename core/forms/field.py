@@ -42,6 +42,10 @@ class FormField(object):
         return (self.errors_list if self.get_option('display_all_errors_for_field') else self.errors_list[0]) \
             if len(self.errors_list) else False
 
+    @property
+    def display_name(self):
+        return self.form.labels.get(self.name, self.name).lower()
+
     def render_base(self):
         html = BeautifulSoup(Loader(self.form.templates_path).load(self.template).generate(
             form=self.form,

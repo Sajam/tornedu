@@ -1,4 +1,4 @@
-# import hashlib
+import hashlib
 from core.model import *
 
 
@@ -7,7 +7,9 @@ class User(TimestampMixin, Base):
     email = Column(String(length=255))
     password = Column(String(length=32))
 
-    # hashlib.md5(password).hexdigest()
+    @before_save('password')
+    def obfuscate_password(self):
+        return hashlib.md5(self.password).hexdigest()
 
     def __repr__(self):
         return '<User(id={}, name={})>'.format(self.id, self.name)

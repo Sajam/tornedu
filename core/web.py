@@ -41,6 +41,6 @@ class RequestHandler(tornado.web.RequestHandler):
 
     def posted_model_fields(self, model):
         fields = [column.name for column in model.metadata.tables[model.__tablename__].columns
-                  if column.name not in ('id', )]
+                  if column.name not in ('id', 'created_at', )]
 
         return {field: self.get_argument(field, None) for field in fields}

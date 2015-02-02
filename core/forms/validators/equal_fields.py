@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from ..validator import Validator
 
 
@@ -7,5 +9,5 @@ class EqualFieldsValidator(Validator):
 
     @property
     def error(self):
-        return 'Value of {} field is different than {} field value.'.format(
-            self.field.name, self.args[0])
+        return 'Wartość w polu {} różni się od wartości w polu {}.'.format(
+            self.field.display_name, self.args[0])

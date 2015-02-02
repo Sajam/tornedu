@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from lepl.apps.rfc3696 import Email
 from ..validator import Validator
 
@@ -11,4 +13,4 @@ class EmailValidator(Validator):
 
     @property
     def error(self):
-        return '"{}" is not a valid e-mail.'.format(self.value if len(self.value) else '(blank)')
+        return '"{}" nie jest poprawnym adresem e-mail.'.format(self.value if len(self.value) else '(puste)')
