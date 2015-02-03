@@ -44,3 +44,11 @@ class RequestHandler(tornado.web.RequestHandler):
                   if column.name not in ('id', 'created_at', )]
 
         return {field: self.get_argument(field, None) for field in fields}
+
+    def redirect(self, url_spec_name_or_url, **kwargs):
+        try:
+            where = self.reverse_url(url_spec_name_or_url)
+        except KeyError:
+            where = url_spec_name_or_url
+
+        super(RequestHandler, self).redirect(self.get_argument('next', where), **kwargs)

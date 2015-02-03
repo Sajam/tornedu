@@ -1,6 +1,8 @@
 {% extends "../base.html" %}
 
 {% block content %}
+    <p class="title">Logowanie użytkownika</p>
+
     <form action="{{ reverse_url('user_login') }}" method="post">
         {% module xsrf_form_html() %}
         {% raw login_form %}

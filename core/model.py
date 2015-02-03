@@ -15,7 +15,10 @@ class SQLExtensions(object):
         for method_name in dir(self):
             method = getattr(self, method_name)
             if hasattr(method, 'run_before_save'):
-                setattr(self, getattr(method, 'run_before_save'), method())
+                field_to_modify = getattr(method, 'run_before_save')
+
+                if field_to_modify in self.__dict__['_sa_instance_state'].committed_state:
+                    setattr(self, field_to_modify, method())
 
         Base.db.add(self)
 

@@ -7,4 +7,21 @@
   * {
     text-align: left;
   }
+
+  p.title {
+    font-size: 22px;
+    font-weight: bold;
+    color: $color1;
+    border-bottom: 1px solid $color1;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+  }
+
+  p.subtitle {
+    color: $color4;
+    font-weight: bold;
+    font-size: 18px;
+    border-bottom: 1px solid $color4;
+    margin: 15px auto;
+  }
 }

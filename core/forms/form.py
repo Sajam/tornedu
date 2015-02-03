@@ -6,19 +6,25 @@ from core.conf import Settings
 
 
 class Form(object):
-    # Form's fields defined in subclasses.
+    # Form's fields & labels defined in subclasses.
     fields = []
     labels = {}
-    templates_path = os.path.join(Settings.TEMPLATE_PATH, 'form')
-    template = 'form.html'
+
+    # This can be overwritten in field's settings (kwargs).
     display_all_errors_for_field = False
 
-    def __init__(self, values=None):
+    templates_path = os.path.join(Settings.TEMPLATE_PATH, 'form')
+    template = 'form.html'
+
+    def __init__(self, values=None, **kwargs):
+        self.extra = kwargs
         self.values = Form.parse_values(values or {})
         self.errors_list = []
         self.fields = [field.prepare(self) for field in self.fields]
         self.extra_validators = self.get_extra_validators()
 
+    # Validators defined by user using @register_validator('field_name')
+    # There method can use self.add_error('message') to raise validation error.
     def get_extra_validators(self):
         extra_validators = defaultdict(list)
 
@@ -40,9 +46,10 @@ class Form(object):
 
         return not bool(len(self.errors_list))
 
-    def clear(self):
-        self.values = {}
-        self.errors_list = []
+    def get_field_by_name(self, name):
+        for field in self.fields:
+            if field.name == name:
+                return field
 
     def add_error(self, error_message):
         self.errors_list += [error_message]

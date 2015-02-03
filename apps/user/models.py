@@ -9,7 +9,11 @@ class User(TimestampMixin, Base):
 
     @before_save('password')
     def obfuscate_password(self):
-        return hashlib.md5(self.password).hexdigest()
+        return User.hash_password(self.password)
+
+    @staticmethod
+    def hash_password(password):
+        return hashlib.md5(password).hexdigest()
 
     def __repr__(self):
         return '<User(id={}, name={})>'.format(self.id, self.name)

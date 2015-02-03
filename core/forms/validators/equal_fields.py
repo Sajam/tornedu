@@ -10,4 +10,4 @@ class EqualFieldsValidator(Validator):
     @property
     def error(self):
         return 'Wartość w polu {} różni się od wartości w polu {}.'.format(
-            self.field.display_name, self.args[0])
+            self.field.display_name, self.form.get_field_by_name(self.args[0]).display_name)

@@ -1,1 +1,19 @@
-Profil użytkownika
+{% extends "../base.html" %}
+
+{% block content %}
+    <p class="title">Profil użytkownika</p>
+
+    <p class="subtitle">Zmiana hasła</p>
+    <form action="{{ reverse_url('user_change_password') }}" method="post">
+        {% module xsrf_form_html() %}
+        {% raw change_password_form %}
+        <input type="submit" value="Zmień hasło">
+    </form>
+
+    <p class="subtitle">Zmiana adresu e-mail</p>
+    <form action="{{ reverse_url('user_change_email') }}" method="post">
+        {% module xsrf_form_html() %}
+        {% raw change_email_form %}
+        <input type="submit" value="Zmień e-mail">
+    </form>
+{% end %}
