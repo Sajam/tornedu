@@ -21,6 +21,7 @@ APPS = [
     'admin',
     'index',
     'user',
+    'category',
 ]
 
 URLS = []

@@ -2,4 +2,13 @@
 
 {% block content %}
     <p class="title">Panel administracyjny</p>
+
+    <p class="subtitle">Aplikacje</p>
+    <ul>
+        {% for app in apps %}
+            {% for model_name, model in apps[app].iteritems() %}
+                <li>{{ model_name }}</li>
+            {% end %}
+        {% end %}
+    </ul>
 {% end %}
