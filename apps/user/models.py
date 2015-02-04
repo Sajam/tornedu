@@ -2,10 +2,11 @@ import hashlib
 from core.model import *
 
 
-class User(TimestampMixin, Base):
+class User(Base, TimestampMixin):
     name = Column(String(length=50))
     email = Column(String(length=255))
     password = Column(String(length=32))
+    is_admin = Column(Boolean, default=False)
 
     @before_save('password')
     def obfuscate_password(self):

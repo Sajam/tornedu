@@ -13,6 +13,6 @@ DATABASES['default'] = {
         user='tornedu', password='LCA8PKx5nuUjWJUJ', host='localhost', dbname='tornedu'),
     'kwargs': {
         'encoding': 'utf-8',
-        'echo': True
+        # 'echo': True
     }
 }

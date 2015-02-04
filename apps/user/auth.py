@@ -1,3 +1,4 @@
+from sqlalchemy.orm.exc import NoResultFound
 from .models import User
 
 
@@ -13,7 +14,14 @@ class Auth(object):
         user_cookie = request.get_secure_cookie(Auth.user_cookie_name)
 
         if user_cookie:
-            return User.get(User.id == int(user_cookie))
+            if not request.current_user_cache:
+                try:
+                    request.current_user_cache = User.get(User.id == int(user_cookie))
+                except NoResultFound:
+                    Auth.logout(request)
+                    request.redirect('index')
+
+            return request.current_user_cache
 
     @staticmethod
     def logout(request):

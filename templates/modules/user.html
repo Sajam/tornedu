@@ -1,0 +1,42 @@
+<div class="user">
+    <div class="silhouette">
+        <img src="{{ static_url('img/silhouette.png') }}">
+    </div>
+    <p class="name">
+        {% if current_user %}{{ current_user.name }}{% else %}Anonimowy{% end %}
+    </p>
+</div>
+<div class="user-popover">
+    <ul class="user-navigation">
+        {% if current_user %}
+            <li>
+                <a href="{{ reverse_url('user_profile') }}">
+                    <i class="fa fa-user"></i> Profil użytkownika
+                </a>
+            </li>
+            {% if current_user.is_admin %}
+                <li>
+                    <a href="{{ reverse_url('admin_index') }}">
+                        <i class="fa fa-gears"></i> Panel administracyjny
+                    </a>
+                </li>
+            {% end %}
+            <li>
+                <a href="{{ reverse_url('user_logout') }}">
+                    <i class="fa fa-lock"></i> Wyloguj się
+                </a>
+            </li>
+        {% else %}
+            <li>
+                <a href="{{ reverse_url('user_login') }}">
+                    <i class="fa fa-key"></i> Logowanie
+                </a>
+            </li>
+            <li>
+                <a href="{{ reverse_url('user_register') }}">
+                    <i class="fa fa-user-plus"></i> Zarejestruj się
+                </a>
+            </li>
+        {% end %}
+    </ul>
+</div>

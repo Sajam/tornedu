@@ -108,6 +108,8 @@ header {
         header .user-popover ul.user-navigation li a {
           display: block;
           color: inherit; }
+          header .user-popover ul.user-navigation li a i {
+            padding-right: 10px; }
 
 .content {
   margin-top: 10px;

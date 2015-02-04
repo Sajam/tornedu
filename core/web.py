@@ -1,3 +1,4 @@
+import functools
 import tornado.web
 from .db import Db
 from .model import Base
@@ -20,13 +21,17 @@ class RequestHandler(tornado.web.RequestHandler):
 
         self.db = None
         self.messages = Messages()
+        self.current_user_cache = None
 
     def prepare(self):
+        Db.queries = []
+
         self.db = Db.instance().session()
         Base.db = self.db
 
     def on_finish(self):
         self.db.commit()
+        print 'Queries: {} / {}'.format(Db.instance().queries_count(), Db.instance().get_queries())
 
     def get(self, *args, **kwargs):
         if self.template:
@@ -52,3 +57,22 @@ class RequestHandler(tornado.web.RequestHandler):
             where = url_spec_name_or_url
 
         super(RequestHandler, self).redirect(self.get_argument('next', where), **kwargs)
+
+
+class AdminRequestHandler(RequestHandler):
+    def prepare(self):
+        super(AdminRequestHandler, self).prepare()
+
+        if not self.get_current_user() or (self.get_current_user() and not self.get_current_user().is_admin):
+            self.redirect('index')
+
+
+def is_admin(method):
+    @functools.wraps(method)
+    def wrapper(self, *args, **kwargs):
+        if not self.current_user or (self.current_user and not self.current_user.is_admin):
+            self.redirect('index')
+
+        return method(self, *args, **kwargs)
+
+    return wrapper

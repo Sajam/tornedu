@@ -1,5 +1,5 @@
 from sqlalchemy.ext.declarative import declarative_base, declared_attr
-from sqlalchemy import Column, Integer, String, DateTime, func
+from sqlalchemy import Column, Integer, String, DateTime, Boolean, func
 
 
 class SQLExtensions(object):

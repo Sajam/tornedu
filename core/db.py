@@ -1,10 +1,11 @@
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, event
 from sqlalchemy.orm import sessionmaker
 from core.conf import Settings
 
 
 class Db(object):
     _instance = None
+    queries = []
 
     @staticmethod
     def instance():
@@ -28,4 +29,18 @@ class Db(object):
         )
         self.session.configure(bind=self.engine)
 
+        event.listen(self.engine, 'before_cursor_execute', Db.catch_queries)
+
         return self
+
+    @staticmethod
+    def catch_queries(conn, cursor, statement, *args):
+        Db.queries.append(statement)
+
+    @staticmethod
+    def get_queries():
+        return Db.queries
+
+    @staticmethod
+    def queries_count():
+        return len(Db.queries)

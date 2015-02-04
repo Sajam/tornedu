@@ -12,14 +12,18 @@ if action == 'create_schema':
     from core.db import Db
     from core.model import *
 
+    db = Db.instance()
+    db.connect('default')
+    db_engine = Db.instance().engine
+
     for app in Settings.APPS:
         try:
             __import__('apps.{}.models'.format(app), globals(), locals(), fromlist=['models'])
         except ImportError:
             pass
 
-    Db.instance().connect('default')
-    Base.metadata.create_all(Db.instance().engine)
+    Base.metadata.drop_all(db_engine)
+    Base.metadata.create_all(db_engine)
 
     print 'Created database schema.'
 else:

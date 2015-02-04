@@ -18,6 +18,7 @@ APP = {
 THREADS = 0  # Forks one process per CPU.
 
 APPS = [
+    'admin',
     'index',
     'user',
 ]
