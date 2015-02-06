@@ -1,0 +1,12 @@
+<header>
+    <a href="{{ reverse_url('index') }}" class="logo">Tornedu</a>
+
+    <ul class="header-navigation">
+        <li><a href="{{ reverse_url('index') }}">Strona główna</a></li>
+        <li><a href="#">Placeholder 1</a></li>
+        <li><a href="#">Placeholder 2</a></li>
+        <li><a href="#">Placeholder 3</a></li>
+    </ul>
+
+    {% include 'user.html' %}
+</header>

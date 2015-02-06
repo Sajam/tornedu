@@ -1,11 +1,17 @@
 <div class="user">
     <div class="silhouette">
-        <img src="{{ static_url('img/silhouette.png') }}">
+        <img src="{{ static_url('img/silhouette.png') }}" alt="Avatar">
     </div>
+
     <p class="name">
-        {% if current_user %}{{ current_user.name }}{% else %}Anonimowy{% end %}
+        {% if current_user %}
+            {{ current_user.name }}
+        {% else %}
+            Anonimowy
+        {% end %}
     </p>
 </div>
+
 <div class="user-popover">
     <ul class="user-navigation">
         {% if current_user %}
@@ -16,7 +22,7 @@
             </li>
             {% if current_user.is_admin %}
                 <li>
-                    <a href="{{ reverse_url('admin_index') }}">
+                    <a href="{{ reverse_url('admin_dashboard') }}">
                         <i class="fa fa-gears"></i> Panel administracyjny
                     </a>
                 </li>

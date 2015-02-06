@@ -4,12 +4,11 @@ from core.conf import Settings
 
 
 class Db(object):
-    _instance = None
     queries = []
 
     @staticmethod
     def instance():
-        if not Db._instance:
+        if not hasattr(Db, '_instance'):
             Db._instance = Db()
 
         return Db._instance
@@ -23,10 +22,12 @@ class Db(object):
     def connect(self, database_connection_name):
         self.connection_name = database_connection_name
         self.connection_settings = Settings.DATABASES[database_connection_name]
+
         self.engine = create_engine(
             self.connection_settings['connection_string'],
             **self.connection_settings['kwargs']
         )
+
         self.session.configure(bind=self.engine)
 
         event.listen(self.engine, 'before_cursor_execute', Db.catch_queries)
@@ -44,3 +45,7 @@ class Db(object):
     @staticmethod
     def queries_count():
         return len(Db.queries)
+
+
+# Immediately create Db() instance.
+Db = Db.instance()

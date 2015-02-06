@@ -1,0 +1,26 @@
+ul.models {
+  li {
+    display: block;
+    line-height: 30px;
+    border-bottom: 1px solid #ccc;
+
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    a {
+      display: block;
+      color: #000;
+      padding-left: 15px;
+
+      &:hover {
+        background-color: #eee;
+        color: $color1;
+      }
+
+      i {
+        padding-right: 10px;
+      }
+    }
+  }
+}

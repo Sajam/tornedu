@@ -4,18 +4,6 @@ from core.forms import *
 from .models import User
 
 
-class LoginForm(Form):
-    fields = [
-        TextField('name', validators=[RequiredValidator]),
-        PasswordField('password', validators=[RequiredValidator])
-    ]
-
-    labels = {
-        'name': 'Nazwa użytkownika',
-        'password': 'Hasło'
-    }
-
-
 class RegisterForm(Form):
     fields = [
         TextField('name', validators=[
@@ -52,6 +40,18 @@ class RegisterForm(Form):
     def email_available_validator(self):
         if User.exists(User.email == self.values.get('email')):
             self.add_error('Podany adres e-mail znajduje się już w naszej bazie danych.')
+
+
+class LoginForm(Form):
+    fields = [
+        TextField('name', validators=[RequiredValidator]),
+        PasswordField('password', validators=[RequiredValidator])
+    ]
+
+    labels = {
+        'name': 'Nazwa użytkownika',
+        'password': 'Hasło'
+    }
 
 
 class ChangePasswordForm(Form):

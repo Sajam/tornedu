@@ -1,0 +1,24 @@
+{% extends '../base_backend.html' %}
+
+{% block content %}
+    <p class="title">Zarządzaj obiektami - {{ model.display_name }}</p>
+
+    <table>
+        <thead>
+            <tr>
+                {% for field in fields %}
+                    <th>{{ field.name }}</th>
+                {% end %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+                <tr>
+                    {% for field in fields %}
+                        <td>{{ getattr(row, field.name) }}</td>
+                    {% end %}
+                </tr>
+            {% end %}
+        </tbody>
+    </table>
+{% end %}

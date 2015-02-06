@@ -11,6 +11,6 @@ if __name__ == '__main__':
     server.bind(Settings.PORT)
     server.start(Settings.THREADS)
 
-    Db.instance().connect('default')
+    Db.connect(Settings.DATABASE)
 
     IOLoop.current().start()

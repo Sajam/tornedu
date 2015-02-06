@@ -231,4 +231,27 @@ form {
           color: #A0A0A0;
           font-size: 11px; }
 
+ul.models li {
+  display: block;
+  line-height: 30px;
+  border-bottom: 1px solid #ccc; }
+  ul.models li:last-child {
+    border-bottom: none; }
+  ul.models li a {
+    display: block;
+    color: #000;
+    padding-left: 15px; }
+    ul.models li a:hover {
+      background-color: #eee;
+      color: #CE1836; }
+    ul.models li a i {
+      padding-right: 10px; }
+
+footer {
+  background-color: #009989;
+  margin-top: 20px;
+  padding: 10px 0;
+  color: #fff;
+  text-align: center; }
+
 /*# sourceMappingURL=style.css.map */

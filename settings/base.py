@@ -4,7 +4,6 @@ BASE_PATH = os.path.join(os.path.dirname(__file__), '..')
 STATIC_PATH = os.path.join(BASE_PATH, 'static')
 TEMPLATE_PATH = os.path.join(BASE_PATH, 'templates')
 
-
 PORT = 8888
 
 APP = {
@@ -15,14 +14,7 @@ APP = {
     'login_url': '/user/login',
 }
 
-THREADS = 0  # Forks one process per CPU.
-
-APPS = [
-    'admin',
-    'index',
-    'user',
-    'category',
-]
+THREADS = 0  # 0 means fork one process per CPU.
 
 URLS = []
 
@@ -31,5 +23,14 @@ DATABASES = {
         'connection_string': 'sqlite:///:memory:'
     }
 }
+
+DATABASE = 'default'
+
+APPS = [
+    'admin',
+    'index',
+    'user',
+    'category',
+]
 
 MESSAGE_TYPES = ('success', 'info', 'warning', 'error', )

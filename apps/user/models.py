@@ -1,8 +1,12 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 import hashlib
 from core.model import *
 
 
 class User(Base, TimestampMixin):
+    __display_name__ = 'Użytkownicy'
+
     name = Column(String(length=50))
     email = Column(String(length=255))
     password = Column(String(length=32))

@@ -1,0 +1,9 @@
+<header>
+    <a href="{{ reverse_url('index') }}" class="logo">Tornedu</a>
+
+    <ul class="header-navigation">
+        <li><a href="{{ reverse_url('admin_dashboard') }}">Dashboard</a></li>
+    </ul>
+
+    {% include 'user.html' %}
+</header>

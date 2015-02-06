@@ -1,0 +1,18 @@
+{% extends '../base_backend.html' %}
+
+{% block content %}
+    <p class="title">Panel administracyjny</p>
+
+    <p class="subtitle">Lista modułów</p>
+
+    <ul class="models">
+        {% for model_name, model in models.iteritems() %}
+            <li>
+                <a href="{{ reverse_url('admin_objects_list', model_name) }}">
+                    <i class="fa fa-arrow-circle-right"></i>
+                    {{ model.display_name }}
+                </a>
+            </li>
+        {% end %}
+    </ul>
+{% end %}

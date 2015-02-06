@@ -11,7 +11,7 @@ class TemplateFunctions(object):
         <a href="{{ reverse_url('page_contact') }}" class="{{ is_active_url('page_contact', 'active') }}">
         """
         for name, spec in self.request.application.named_handlers.items():
-            if name == url_name and isinstance(self, spec.handler_class):
+            if name == url_name and isinstance(self.request, spec.handler_class):
                 return active_class
 
     def as_dict(self):

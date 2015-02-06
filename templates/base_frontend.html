@@ -3,30 +3,30 @@
     <head lang="en">
         <meta charset="UTF-8">
         <title>Tornedu</title>
+
         <script type="text/javascript" src="{{ static_url('vendor/js/jquery-2.1.3.min.js') }}"></script>
         <script type="text/javascript" src="{{ static_url('js/general.js') }}"></script>
+
         <link rel="stylesheet" href="{{ static_url('vendor/css/font-awesome.min.css') }}">
         <link rel="stylesheet" href="{{ static_url('css/compiled/style.css') }}">
-        {% block header_extends %}{% end %}
+
+        {% block header_extra %}
+            <!-- Additional scripts/styles -->
+        {% end %}
     </head>
     <body>
-        <header>
-            <a href="{{ reverse_url('index') }}" class="logo">Tornedu</a>
-            <ul class="header-navigation">
-                <li><a href="{{ reverse_url('index') }}">Strona główna</a></li>
-                <li><a href="#">Kategorie</a></li>
-                <li><a href="#">O co chodzi?</a></li>
-                <li><a href="#">Dodaj treść</a></li>
-            </ul>
-            {% include 'modules/user.html %}
-        </header>
+        {% include 'blocks/header_frontend.html' %}
 
         <div class="content">
             {% block messages %}
-                {% include 'modules/messages.html' %}
+                {% include 'blocks/messages.html' %}
             {% end %}
 
-            {% block content %}{% end %}
+            {% block content %}
+                <!-- Pages' contents -->
+            {% end %}
         </div>
+
+        {% include 'blocks/footer.html' %}
     </body>
 </html>

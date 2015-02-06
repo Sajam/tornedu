@@ -1,6 +1,7 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from core.web import RequestHandler
 
 
 class IndexHandler(RequestHandler):
-    def get(self, *args, **kwargs):
-        self.render('index/index.html')
+    template = 'index/index.html'
