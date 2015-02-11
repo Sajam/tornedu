@@ -1,8 +1,10 @@
 from core.conf import Settings
 from core.model import Base
+from core.web import AdminRequestHandler
 
 
 class AdminUtils(object):
+    models_handlers = {}
     apps_models = {}
     models = {}
     model_to_app = {}
@@ -13,6 +15,7 @@ class AdminUtils(object):
     @staticmethod
     def get_apps_models():
         processed_models = []
+        processed_admin_handlers = []
 
         for app_name in Settings.APPS:
             AdminUtils.apps_models[app_name] = {}
@@ -22,6 +25,26 @@ class AdminUtils(object):
                     'apps.{}.models'.format(app_name),
                     fromlist=['apps.{}'.format(app_name)]
                 )
+
+                try:
+                    admin_handlers = __import__(
+                        'apps.{}.admin'.format(app_name),
+                        fromlist=['apps.{}'.format(app_name)]
+                    )
+
+                    if admin_handlers:
+                        for admin_handler in AdminRequestHandler.__subclasses__():
+                            admin_handler_name = admin_handler.__name__
+
+                            if admin_handler_name not in processed_admin_handlers:
+                                processed_admin_handlers.append(admin_handler_name)
+
+                                if hasattr(admin_handler, 'model'):
+                                    model = getattr(admin_handler, 'model')
+                                    AdminUtils.models_handlers[model.__name__] = admin_handler
+
+                except ImportError:
+                    pass
 
                 if models:
                     for model in Base.__subclasses__():

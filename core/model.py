@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime, Boolean, func
+from sqlalchemy import Column, Integer, String, DateTime, Boolean, ForeignKey, func
 from sqlalchemy.ext.declarative import declared_attr, declarative_base
 from sqlalchemy.orm.exc import MultipleResultsFound, NoResultFound
 

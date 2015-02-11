@@ -1,0 +1,32 @@
+{% extends '../base_backend.html' %}
+
+{% block header_extra %}
+    <script src="{{ static_url('vendor/js/react-with-addons-0.12.2.js') }}"></script>
+    <script src="{{ static_url('vendor/js/JSXTransformer-0.12.2.js') }}"></script>
+    <script src="{{ static_url('compiled/styles.js') }}"></script>
+    <script src="{{ static_url('compiled/common_components.js') }}"></script>
+    <script src="{{ static_url('compiled/tree.js') }}"></script>
+{% end %}
+
+{% block content %}
+    <p class="title">Drzewo kategorii</p>
+
+    <div id="tree">
+        <script type="text/jsx">
+            var treeData = [
+                    {% for category in categories %}
+                        {
+                            'id': {{ category.id }},
+                            'name': '{{ category.name }}',
+                            'parent': {{ category.parent or 'undefined' }}
+                        },
+                    {% end %}
+                ];
+
+            React.render(
+                <Tree data={treeData} />,
+                document.getElementById('tree')
+            );
+        </script>
+    </div>
+{% end %}

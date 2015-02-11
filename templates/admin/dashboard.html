@@ -6,11 +6,11 @@
     <p class="subtitle">Lista modułów</p>
 
     <ul class="models">
-        {% for model_name, model in models.iteritems() %}
+        {% for model in models %}
             <li>
-                <a href="{{ reverse_url('admin_objects_list', model_name) }}">
+                <a href="{{ model['url'] }}">
                     <i class="fa fa-arrow-circle-right"></i>
-                    {{ model.display_name }}
+                    {{ model['model'].display_name }}
                 </a>
             </li>
         {% end %}

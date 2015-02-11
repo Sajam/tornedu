@@ -8,7 +8,18 @@ class DashboardHandler(AdminRequestHandler):
     template = 'admin/dashboard.html'
 
     def get(self):
-        self.render(self.template, models=AdminUtils.models)
+        models = []
+
+        for model_name, model in AdminUtils.models.iteritems():
+            models.append({
+                'name': model_name,
+                'model': model,
+                'url': (self.reverse_url('admin_objects_list', model_name)
+                        if model_name not in AdminUtils.models_handlers else
+                        self.reverse_url(AdminUtils.models_handlers[model_name]))
+            })
+
+        self.render(self.template, models=models)
 
 
 class ObjectsListHandler(AdminRequestHandler):

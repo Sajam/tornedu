@@ -25,7 +25,7 @@ class RegisterHandler(RequestHandler):
         self.render(self.template, register_form=form)
 
 
-class LoginHandler(RequestHandler, Auth):
+class LoginHandler(RequestHandler):
     template = 'user/login.html'
 
     def get(self):
@@ -101,7 +101,7 @@ class ChangeEmailHandler(ProfileHandler):
         )
 
 
-class LogoutHandler(RequestHandler, Auth):
+class LogoutHandler(RequestHandler):
     @authenticated
     def get(self):
         self.logout()

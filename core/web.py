@@ -1,13 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import types
 from tornado.web import RequestHandler, authenticated
 from .db import Db
 from .model import Base
 from .messages import Messages
 from .template_functions import TemplateFunctions
+from apps.user.auth import Auth
 
 
-class RequestHandler(RequestHandler):
+class RequestHandler(RequestHandler, Auth):
     template = None
 
     def prepare(self):
@@ -48,6 +50,16 @@ class RequestHandler(RequestHandler):
             where = url_spec_name_or_url
 
         super(RequestHandler, self).redirect(self.get_argument('next', where), **kwargs)
+
+    # Allow to pass handler class as argument (name).
+    def reverse_url(self, name, *args):
+        if isinstance(name, (type, types.ClassType)) and issubclass(name, (RequestHandler, AdminRequestHandler)):
+            for url_name, spec in self.application.named_handlers.iteritems():
+                if spec.handler_class == name:
+                    name = url_name
+                    break
+
+        return super(RequestHandler, self).reverse_url(name, *args)
 
     # Return all POST fields for specified model (but only relevant eg. no id or created_at).
     def posted_model_fields(self, model):
