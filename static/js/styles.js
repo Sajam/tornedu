@@ -7,6 +7,15 @@ var Styles = function () {
 
 		hide: {
 			display: 'none'
+		},
+
+		faIcon: {
+			width: 16,
+			height: 16
+		},
+
+		inline: {
+			display: 'inline-block'
 		}
 	},
 

@@ -46,6 +46,9 @@ class SQLExtensions(object):
                     setattr(self, field_to_modify, method())
 
         Base.db.add(self)
+        Base.db.commit()
+
+        return self
 
 
 class Base(SQLExtensions):
