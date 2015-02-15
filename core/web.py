@@ -18,6 +18,7 @@ class RequestHandler(RequestHandler, Auth):
         self.messages = Messages()
 
     def on_finish(self):
+        BaseModel.db_session.commit()
         queries_count = Database.queries_count()
         log('{} {} executed'.format(queries_count, ['queries', 'query'][queries_count == 1]))
         log('Queries', show_datetime=False, data=Database.get_queries())

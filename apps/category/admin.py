@@ -20,3 +20,21 @@ class CategoryAddHandler(AdminRequestHandler):
         category = Category(name=self.get_argument('name', ''), parent=int(parent) if parent else None).save()
 
         self.write(json.dumps({'id': category.id}))
+
+
+class CategoryDeleteHandler(AdminRequestHandler):
+    def post(self):
+        Category.delete(Category.id == int(self.get_argument('id')))
+        self.write('success')
+
+
+class CategoryEditHandler(AdminRequestHandler):
+    def post(self):
+        category = Category.get(Category.id == int(self.get_argument('id')))
+
+        name = self.get_argument('name')
+        if name:
+            category.name = name
+
+        category.save()
+        self.write('success')

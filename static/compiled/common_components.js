@@ -29,7 +29,7 @@ var Display = React.createClass({displayName: "Display",
 });
 
 var BasicMixins = {
-	preventClickEvent: function (e) {
+	stopPropagation: function (e) {
 		e.stopPropagation();
 	}
 };

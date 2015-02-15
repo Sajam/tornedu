@@ -9,12 +9,11 @@ action = sys.argv[1]
 
 if action == 'create_schema':
     from core.conf import Settings
-    from core.database import Db
+    from core.database import Database
     from core.model import *
 
-    db = Db.instance()
-    db.connect('default')
-    db_engine = Db.instance().engine
+    Database.connect('default')
+    db_engine = Database.engine
 
     for app in Settings.APPS:
         try:
@@ -22,8 +21,8 @@ if action == 'create_schema':
         except ImportError:
             pass
 
-    Base.metadata.drop_all(db_engine)
-    Base.metadata.create_all(db_engine)
+    BaseModel.metadata.drop_all(db_engine)
+    BaseModel.metadata.create_all(db_engine)
 
     print 'Created database schema.'
 else:

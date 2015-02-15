@@ -33,6 +33,10 @@ class SQLExtensions(object):
     def exists(cls, *criterion):
         return bool(cls.db_session.query(cls).filter(*criterion).count())
 
+    @classmethod
+    def delete(cls, *criterion):
+        return cls.db_session.query(cls).filter(*criterion).delete()
+
     def save(self):
         # Search for model's fields callbacks that should be executed before save,
         # BUT only when field value has changed.
