@@ -23,15 +23,15 @@ class TimestampMixin(object):
 class SQLExtensions(object):
     @classmethod
     def query(cls):
-        return cls.db.query(cls)
+        return cls.db_session.query(cls)
 
     @classmethod
     def get(cls, *criterion):
-        return cls.db.query(cls).filter(*criterion).one()
+        return cls.db_session.query(cls).filter(*criterion).one()
 
     @classmethod
     def exists(cls, *criterion):
-        return bool(cls.db.query(cls).filter(*criterion).count())
+        return bool(cls.db_session.query(cls).filter(*criterion).count())
 
     def save(self):
         # Search for model's fields callbacks that should be executed before save,
@@ -45,14 +45,14 @@ class SQLExtensions(object):
                 if field_to_modify in self.__dict__['_sa_instance_state'].committed_state:
                     setattr(self, field_to_modify, method())
 
-        Base.db.add(self)
-        Base.db.commit()
+        BaseModel.db_session.add(self)
+        BaseModel.db_session.commit()
 
         return self
 
 
-class Base(SQLExtensions):
-    db = None
+class BaseModel(SQLExtensions):
+    db_session = None
 
     @declared_attr
     def __tablename__(cls):
@@ -69,4 +69,4 @@ class Base(SQLExtensions):
     id = Column(Integer, primary_key=True)
 
 
-Base = declarative_base(cls=Base)
+BaseModel = declarative_base(cls=BaseModel)

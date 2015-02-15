@@ -1,5 +1,5 @@
 from core.conf import Settings
-from core.model import Base
+from core.model import BaseModel
 from core.web import AdminRequestHandler
 
 
@@ -47,7 +47,7 @@ class AdminUtils(object):
                     pass
 
                 if models:
-                    for model in Base.__subclasses__():
+                    for model in BaseModel.__subclasses__():
                         model_name = model.__name__
 
                         if model_name not in processed_models:

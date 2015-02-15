@@ -2,10 +2,11 @@
 # -*- coding: utf-8 -*-
 import types
 from tornado.web import RequestHandler, authenticated
-from .db import Db
-from .model import Base
+from .database import Database
+from .model import BaseModel
 from .messages import Messages
 from .template_functions import TemplateFunctions
+from .utils import log
 from apps.user.auth import Auth
 
 
@@ -13,16 +14,13 @@ class RequestHandler(RequestHandler, Auth):
     template = None
 
     def prepare(self):
-        Db.queries = []
-        Base.db = Db.session()
-
+        BaseModel.db_session = Database.make_session()
         self.messages = Messages()
 
     def on_finish(self):
-        Base.db.commit()
-
-        print 'Number of executed queries: {}'.format(Db.queries_count())
-        # print 'Queries: {}'.format(Db.get_queries())
+        queries_count = Database.queries_count()
+        log('{} {} executed'.format(queries_count, ['queries', 'query'][queries_count == 1]))
+        log('Queries', show_datetime=False, data=Database.get_queries())
 
     @property
     def current_user(self):
@@ -43,13 +41,18 @@ class RequestHandler(RequestHandler, Auth):
         if self.template:
             self.render(self.template)
 
-    def redirect(self, url_spec_name_or_url, **kwargs):
-        try:
-            where = self.reverse_url(url_spec_name_or_url)
-        except KeyError:
-            where = url_spec_name_or_url
+    def redirect(self, target, **kwargs):
+        remembered_redirect = self.get_argument('next')
 
-        super(RequestHandler, self).redirect(self.get_argument('next', where), **kwargs)
+        if remembered_redirect:
+            where = remembered_redirect
+        else:
+            try:
+                where = self.reverse_url(target)
+            except KeyError:
+                where = target
+
+        super(RequestHandler, self).redirect(where, **kwargs)
 
     # Allow to pass handler class as argument (name).
     def reverse_url(self, name, *args):

@@ -3,7 +3,7 @@
 from core.model import *
 
 
-class Category(Base, TimestampMixin):
+class Category(BaseModel, TimestampMixin):
     __display_name__ = 'Kategorie'
 
     name = Column(String(length=255))

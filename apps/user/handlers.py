@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 from core.web import RequestHandler, authenticated
 from core.model import MultipleResultsFound, NoResultFound
-from .auth import Auth
 from .models import User
 from .forms import RegisterForm, LoginForm, ChangePasswordForm, ChangeEmailForm
 

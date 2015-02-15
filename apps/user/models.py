@@ -4,7 +4,7 @@ import hashlib
 from core.model import *
 
 
-class User(Base, TimestampMixin):
+class User(BaseModel, TimestampMixin):
     __display_name__ = 'Użytkownicy'
 
     name = Column(String(length=50))

@@ -2,7 +2,7 @@ class TemplateFunctions(object):
     def __init__(self, request):
         self.request = request
 
-    def posted(self, key, default=''):
+    def posted(self, key, default=None):
         return self.request.get_argument(key, default)
 
     def is_active_url(self, url_name, active_class):

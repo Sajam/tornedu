@@ -9,7 +9,7 @@ action = sys.argv[1]
 
 if action == 'create_schema':
     from core.conf import Settings
-    from core.db import Db
+    from core.database import Db
     from core.model import *
 
     db = Db.instance()
