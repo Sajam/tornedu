@@ -1,13 +1,10 @@
-from pprint import pprint
+import os
 import math
 import datetime
-from .conf import Settings
+from pprint import pprint
 
 
 def log(message=None, show_datetime=None, datetime_format=None, **kwargs):
-    if not Settings.APP['debug']:
-        return
-
     width = 80
 
     if show_datetime is None:
@@ -35,3 +32,18 @@ def log(message=None, show_datetime=None, datetime_format=None, **kwargs):
     else:
         print(message)
 
+
+def all_subclasses(cls):
+    return cls.__subclasses__() + [g for s in cls.__subclasses__()
+                                   for g in all_subclasses(s)]
+
+
+def import_class_from_path(class_name, path=None):
+    try:
+        return __import__('.'.join(([path] if path else []) + [class_name]), globals(), locals(), fromlist=[class_name])
+    except ImportError:
+        pass
+
+
+def directories_in_path(path):
+    return next(os.walk(path))[1]

@@ -10,4 +10,4 @@ class Category(BaseModel, TimestampMixin):
     parent = Column(Integer, ForeignKey('category.id', ondelete='CASCADE'))
     
     def __repr__(self):
-        return '<Category(id={})>'.format(self.id)
+        return '<Category(id={}, name={})>'.format(self.id, self.name)

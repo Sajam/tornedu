@@ -1,40 +1,44 @@
 from sqlalchemy import create_engine, event
+from sqlalchemy.engine.url import URL
 from sqlalchemy.orm import sessionmaker
-from .conf import Settings
 from .utils import log
 
 
 class Database(object):
+    INITIALIZATION_INDICATOR = 'creating'
     queries = []
-    creating_indicator = 'creating'
 
     @staticmethod
     def instance():
         if not hasattr(Database, '_instance'):
-            Database._instance = Database.creating_indicator
-            Database._instance = Database()
+            Database._instance = Database.INITIALIZATION_INDICATOR
+            Database()
+            log('Database() instance created.')
 
         return Database._instance
 
     def __init__(self):
-        if not hasattr(Database, '_instance') or (
-                hasattr(Database, '_instance') and Database._instance != Database.creating_indicator):
+        instance = getattr(Database, '_instance') if hasattr(Database, '_instance') else None
+
+        if not instance or (instance and instance != Database.INITIALIZATION_INDICATOR):
             raise Exception('Database object should be accessed using Database.instance() method.')
+        elif instance == Database.INITIALIZATION_INDICATOR:
+            self.session = sessionmaker()
+            self.engine = None
 
-        self.session = sessionmaker()
-        self.engine = None
+            setattr(Database, '_instance', self)
 
-        log('Created Database() instance')
+    def connect(self, connection_settings):
+        url = URL(
+            connection_settings.get('driver', 'mysql'),
+            **dict((k, connection_settings.get(k)) for k in ('username', 'password', 'host', 'port', 'database', 'query'))
+        )
 
-    def connect(self, connection_name):
-        connection_settings = Settings.DATABASES[connection_name]
-
-        self.engine = create_engine(connection_settings['connection_string'], **connection_settings['kwargs'])
+        self.engine = create_engine(url, **connection_settings.get('options', {}))
         self.session.configure(bind=self.engine)
 
-        event.listen(self.engine, 'before_cursor_execute', Database.catch_queries)
-
-        log('Connected to database "{}"'.format(connection_name))
+        event.listen(self.engine, 'before_cursor_execute', Database.log_query)
+        log('Connected to database "{}" at {}{}.'.format(url.database, url.host, ':{}'.format(url.port) if url.port else ''))
 
         return self
 
@@ -44,7 +48,7 @@ class Database(object):
         return self.session()
 
     @staticmethod
-    def catch_queries(conn, cursor, statement, *args):
+    def log_query(conn, cursor, statement, *args):
         Database.queries.append(statement)
 
     @staticmethod
@@ -54,7 +58,3 @@ class Database(object):
     @staticmethod
     def queries_count():
         return len(Database.queries)
-
-
-# Immediately create Database() instance.
-Database = Database.instance()

@@ -10,10 +10,11 @@ if __name__ == '__main__':
 
     server = HTTPServer(app)
     server.bind(Settings.PORT)
-    server.start(Settings.THREADS)
+    server.start(Settings.NUM_PROCESSES)
 
-    Database.connect(Settings.DATABASE)
+    if Settings.USING_DATABASE:
+        Database.instance().connect(Settings.DEFAULT_DATABASE_SETTINGS)
 
-    log("Server started - access at http://127.0.0.1:{}/".format(Settings.PORT))
+    log("Server started - access at http://127.0.0.1:{}/.".format(Settings.PORT))
 
     IOLoop.current().start()

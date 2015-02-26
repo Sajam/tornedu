@@ -20,6 +20,11 @@
                     <i class="fa fa-user"></i> Profil użytkownika
                 </a>
             </li>
+            <li>
+                <a href="{{ reverse_url('content_create') }}">
+                    <i class="fa fa-file-text-o"></i> Dodaj treść
+                </a>
+            </li>
             {% if current_user.is_admin %}
                 <li>
                     <a href="{{ reverse_url('admin_dashboard') }}">

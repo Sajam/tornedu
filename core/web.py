@@ -14,7 +14,7 @@ class RequestHandler(RequestHandler, Auth):
     template = None
 
     def prepare(self):
-        BaseModel.db_session = Database.make_session()
+        BaseModel.db_session = Database.instance().make_session()
         self.messages = Messages()
 
     def on_finish(self):
@@ -43,7 +43,7 @@ class RequestHandler(RequestHandler, Auth):
             self.render(self.template)
 
     def redirect(self, target, **kwargs):
-        remembered_redirect = self.get_argument('next')
+        remembered_redirect = self.get_argument('next', False)
 
         if remembered_redirect:
             where = remembered_redirect
