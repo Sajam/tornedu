@@ -2,7 +2,6 @@ import os
 from core.utils import import_class_from_path
 
 
-# Import proper settings.
 environment = os.environ.get('TORNADO_ENVIRONMENT_FORCE', os.environ.get('TORNADO_ENVIRONMENT', 'stable'))
 Settings = import_class_from_path(environment, 'settings')
 

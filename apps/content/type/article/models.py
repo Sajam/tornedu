@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from core.model import *
-from ..models import Content
+from ...models import Content
 
 
 class Article(Content):

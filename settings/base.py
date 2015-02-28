@@ -16,6 +16,17 @@ PORT = 8888
 # http://tornado.readthedocs.org/en/latest/tcpserver.html#tornado.tcpserver.TCPServer.start
 NUM_PROCESSES = 0
 
+# Paths specifying where to search for classes.
+LOADER_PATHS = {
+    'models': [
+        'apps.*.models',
+    ],
+    'management': [
+        'core.management.commands.*',
+        'apps.management.*',
+    ],
+}
+
 # URLs gonna be populated automatically by collecting URL-s defined in enabled apps.
 URLS = []
 
