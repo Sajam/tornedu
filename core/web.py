@@ -84,3 +84,16 @@ class AdminRequestHandler(RequestHandler):
 
         if not self.current_user or (self.current_user and not self.current_user.is_admin):
             self.redirect('index')
+
+
+def ajax(method):
+    def wrapped(self, *args, **kwargs):
+        try:
+            return method(self, *args, **kwargs)
+        except Exception as e:
+            self.write({
+                'status': 'error',
+                'message': e.message
+            })
+
+    return wrapped

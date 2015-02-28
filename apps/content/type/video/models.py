@@ -6,6 +6,8 @@ from .providers import VideoProvider
 
 
 class Video(Content):
+    __display_name__ = 'Wideo'
+
     id = Column(Integer, ForeignKey('content.id'), primary_key=True)
     provider = Column(Enum(*VideoProvider.get_types().keys()))
     content = Column(String(length=500))

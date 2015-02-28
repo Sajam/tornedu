@@ -37,4 +37,5 @@ if hasattr(Settings, 'TEMPLATE_PATH'):
 # Collecting all URLS to pass them later to application when it starts.
 for app_name in Settings.APPS:
     app_urls = import_class_from_path('urls', 'apps.{}'.format(app_name))
-    Settings.URLS += app_urls.URLS
+    if app_urls:
+        Settings.URLS += app_urls.URLS

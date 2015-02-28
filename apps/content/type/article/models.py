@@ -5,7 +5,7 @@ from ...models import Content
 
 
 class Article(Content):
-    __display_name__ = 'Artykuły'
+    __display_name__ = 'Artykuł'
 
     id = Column(Integer, ForeignKey('content.id'), primary_key=True)
     content = Column(Text)

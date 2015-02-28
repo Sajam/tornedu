@@ -22,6 +22,10 @@ class TimestampMixin(object):
 
 class SQLExtensions(object):
     @classmethod
+    def all(cls):
+        return cls.db_session.query(cls).all()
+
+    @classmethod
     def query(cls):
         return cls.db_session.query(cls)
 

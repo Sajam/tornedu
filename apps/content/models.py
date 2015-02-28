@@ -6,7 +6,7 @@ from core.utils import import_subclasses
 
 
 class Content(BaseModel, TimestampMixin):
-    __display_name__ = 'Treści'
+    __display_name__ = 'Treść'
 
     type = Column(String(length=255))
     user = Column(ForeignKey('user.id'))
@@ -24,4 +24,6 @@ class Content(BaseModel, TimestampMixin):
         return '<Content(id={}, name={})>'.format(self.id, self.name)
 
 
-import_subclasses(Content, allowed_paths=['apps.content.type.*.models'], base_path=Settings.BASE_PATH)
+content_types = import_subclasses(Content, allowed_paths=['apps.content.type.*.models'], base_path=Settings.BASE_PATH)
+content_types = {content_type.__mapper_args__['polymorphic_identity']: content_type.__display_name__
+                 for content_type in content_types}

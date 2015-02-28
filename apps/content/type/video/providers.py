@@ -4,6 +4,8 @@ from core.utils import all_subclasses
 
 
 class VideoProvider(object):
+    name = NotImplementedError()
+
     def __init__(self, content):
         self.content = content
 
@@ -17,11 +19,15 @@ class VideoProvider(object):
 
 
 class VideoProviderYouTube(VideoProvider):
+    name = 'YouTube'
+
     def __repr__(self):
         return '<iframe width="420" height="315" src="https://www.youtube-nocookie.com/embed/sNPnbI1arSE"' \
                'frameborder="0" allowfullscreen></iframe>'
 
 
 class VideoProviderCustom(VideoProvider):
+    name = 'Domyślny'
+
     def __repr__(self):
         return self.content
