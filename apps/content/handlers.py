@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from core.web import RequestHandler, authenticated, ajax
 from .forms import ContentForm, content_types_forms
-from .models import content_types
+from .models import Content, content_types
 
 
 class CreateContent(RequestHandler):
@@ -54,3 +54,14 @@ class ContentTypeForm(RequestHandler):
             return self.write(content_types_forms[content_type]().render())
         else:
             raise Exception('Nieznany typ treści.')
+
+
+class ContentView(RequestHandler):
+    template = 'content/view.html'
+
+    def get(self, id):
+        content = Content.get(Content.id == id)
+        content.views += 1
+        content.save()
+
+        self.render(self.template, content=content)

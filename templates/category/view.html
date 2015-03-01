@@ -3,4 +3,13 @@
 {% block content %}
     <p class="title">Kategoria {{ category.name }}</p>
 
+    <ul>
+        {% for content in category.content %}
+            <li>
+                <a href="{{ reverse_url('content_view', content.id) }}">
+                    {{ content.name }}
+                </a>
+            </li>
+        {% end %}
+    </ul>
 {% end %}

@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Boolean, Integer, String, Text, DateTime, Interval, Enum, ForeignKey, func
 from sqlalchemy.ext.declarative import declared_attr, declarative_base
 from sqlalchemy.orm.exc import MultipleResultsFound, NoResultFound
+from sqlalchemy.orm import relationship
 
 
 # Decorator that adds callback to model's field to execute before save (it value modified).
@@ -36,7 +37,7 @@ class SQLExtensions(object):
     @classmethod
     def filter(cls, *criterion):
         return cls.db_session.query(cls).filter(*criterion)
-    
+
     @classmethod
     def exists(cls, *criterion):
         return bool(cls.db_session.query(cls).filter(*criterion).count())

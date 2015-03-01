@@ -9,12 +9,13 @@ class Category(BaseModel, TimestampMixin):
 
     name = Column(String(length=255))
     parent = Column(Integer, ForeignKey('category.id', ondelete='CASCADE'))
+    content = relationship("Content")
 
     @staticmethod
     def items(*args, **kwargs):
         result = []
         categories = Category.filter(Category.parent == kwargs['parent']).all()\
-            if 'parent' in kwargs else filter(lambda c: not c.parent, Category.all())
+            if 'parent' in kwargs else Category.all()
 
         def sort_and_set_levels(items, level=0, insert_at_index=-1):
             for category in items:
@@ -27,7 +28,7 @@ class Category(BaseModel, TimestampMixin):
                                                       level=level + 1, insert_at_index=insert_at_index)
             return insert_at_index
 
-        sort_and_set_levels(categories)
+        sort_and_set_levels(categories if 'parent' in kwargs else filter(lambda c: not c.parent, categories))
 
         return filter(lambda c: c.level == kwargs['level'], result) if 'level' in kwargs else result
 
