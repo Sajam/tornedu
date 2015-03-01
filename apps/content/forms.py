@@ -21,10 +21,18 @@ def content_type_form(content_type, *args, **kwargs):
 
 class ContentForm(Form):
     fields = [
-        SelectField('type', options=content_types, blank='--- wybierz ---', validators=[
-            RequiredValidator
-        ]),
-        SelectField('category', options=Category.tree_select_options, blank='--- wybierz ---', validators=[
+        SelectField(
+            'type',
+            blank='--- wybierz ---',
+            options={
+                content_type_name: content_type.__display_name__
+                for content_type_name, content_type in content_types.iteritems()
+            },
+            validators=[
+                RequiredValidator, InValidator(content_types.keys())
+            ]
+        ),
+        SelectField('category', blank='--- wybierz ---', options=Category.tree_select_options, validators=[
             RequiredValidator
         ]),
         TextField('name', validators=[
@@ -35,7 +43,7 @@ class ContentForm(Form):
     labels = {
         'type': 'Typ treści',
         'category': 'Kategoria',
-        'name': 'Nazwa (tytuł) treści'
+        'name': 'Nazwa (tytuł) dla treści'
     }
 
 

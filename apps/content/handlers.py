@@ -16,21 +16,32 @@ class CreateContent(RequestHandler):
     def post(self):
         content_type = self.get_argument('type', None)
         content_form = ContentForm(self.request.body_arguments)
-        content_type_form = content_types_forms[content_type](self.request.body_arguments)
+        content_type_form = None
+        errors = []
 
-        content_form.validate()
-        content_type_form.validate()
-
-        if content_form.errors or content_type_form.errors:
-            self.messages.error(
-                content_form.errors if content_form.errors else [] +
-                content_type_form.errors if content_type_form.errors else []
-            )
+        if not content_form.validate():
+            errors += content_form.errors
         else:
-            # @TODO: implement
+            content_form.clear()
+
+        if content_type and content_type in content_types:
+            content_type_form = content_types_forms[content_type](self.request.body_arguments)
+            if not content_type_form.validate():
+                errors += content_type_form.errors
+            else:
+                content_type_form.clear()
+
+        if errors:
+            self.messages.error(errors)
+        else:
+            content_type_model = content_types[content_type]
+            content_type_entry = content_type_model(**self.posted_model_fields(content_type_model))
+            content_type_entry.user = self.current_user.id
+            content_type_entry.save()
+
             self.messages.success('Treść dodana poprawnie!')
 
-        self.render(self.template, content_form=content_form, content_type_form=content_type_form)
+        self.render(self.template, content_form=content_form, content_type_form=content_type_form or '')
 
 
 class ContentTypeForm(RequestHandler):

@@ -12,7 +12,7 @@ class Content(BaseModel, TimestampMixin):
     user = Column(ForeignKey('user.id'))
     category = Column(ForeignKey('category.id'))
     name = Column(String(length=255))
-    views = Column(Integer)
+    views = Column(Integer, default=0)
 
     __mapper_args__ = {
         'polymorphic_identity': 'content',
@@ -25,5 +25,4 @@ class Content(BaseModel, TimestampMixin):
 
 
 content_types = import_subclasses(Content, allowed_paths=['apps.content.type.*.models'], base_path=Settings.BASE_PATH)
-content_types = {content_type.__mapper_args__['polymorphic_identity']: content_type.__display_name__
-                 for content_type in content_types}
+content_types = {content_type.__mapper_args__['polymorphic_identity']: content_type for content_type in content_types}

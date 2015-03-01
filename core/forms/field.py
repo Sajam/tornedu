@@ -1,6 +1,7 @@
 from compiler.ast import flatten
 from bs4 import BeautifulSoup
 from tornado.template import Loader
+from .validators.required import RequiredValidator
 
 
 class FormField(object):
@@ -31,11 +32,18 @@ class FormField(object):
         return self
 
     def validate(self):
-        for validator in self.validators:
-            if not validator.validate_base():
-                self.errors_list += flatten([validator.errors])
+        required_validator = filter(lambda v: isinstance(v, RequiredValidator), self.validators)
+
+        # If there is no RequiredValidator run validators only if there is any value. If RequiredValidator run all.
+        if required_validator or (not required_validator and self.value):
+            for validator in self.validators:
+                if not validator.validate_base():
+                    self.errors_list += flatten([validator.errors])
 
         return not bool(len(self.errors_list))
+
+    def clear(self):
+        self.value = self.initial_value or ''
 
     @property
     def errors(self):

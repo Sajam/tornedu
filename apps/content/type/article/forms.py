@@ -7,7 +7,7 @@ from ...forms import content_type_form
 @content_type_form('article')
 class ContentTypeArticleForm(Form):
     fields = [
-        TextField('content', validators=[
+        TextareaField('content', validators=[
             RequiredValidator, LengthValidator(min=10)
         ]),
     ]

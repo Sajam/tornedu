@@ -68,9 +68,8 @@ class RequestHandler(RequestHandler, Auth):
     # Return all POST fields for specified model (but only relevant eg. no id or created_at).
     def posted_model_fields(self, model):
         return {
-            field: self.get_argument(field, None) for field in [
-                field.name for field in model.fields() if field.name not in ('id', 'created_at', )
-            ]
+            column.name: self.get_argument(column.name, None)
+            for column in model.__mapper__.columns if column.name not in ('id', 'created_at', )
         }
 
     # Just to avoid IDE "must implement all abstract methods" warning.

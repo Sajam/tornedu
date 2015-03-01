@@ -54,6 +54,12 @@ class Form(object):
     def add_error(self, error_message):
         self.errors_list += [error_message]
 
+    def clear(self):
+        self.values = {}
+
+        for field in self.fields:
+            field.clear()
+
     @property
     def errors(self):
         return self.errors_list if len(self.errors_list) else False
