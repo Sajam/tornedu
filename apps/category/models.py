@@ -11,9 +11,10 @@ class Category(BaseModel, TimestampMixin):
     parent = Column(Integer, ForeignKey('category.id', ondelete='CASCADE'))
 
     @staticmethod
-    def items():
+    def items(*args, **kwargs):
         result = []
-        categories = Category.all()
+        categories = Category.filter(Category.parent == kwargs['parent']).all()\
+            if 'parent' in kwargs else filter(lambda c: not c.parent, Category.all())
 
         def sort_and_set_levels(items, level=0, insert_at_index=-1):
             for category in items:
@@ -26,9 +27,9 @@ class Category(BaseModel, TimestampMixin):
                                                       level=level + 1, insert_at_index=insert_at_index)
             return insert_at_index
 
-        sort_and_set_levels(filter(lambda c: not c.parent, categories))
+        sort_and_set_levels(categories)
 
-        return result
+        return filter(lambda c: c.level == kwargs['level'], result) if 'level' in kwargs else result
 
     @staticmethod
     def tree_select_options(level_indicator=None, **kwargs):

@@ -1,0 +1,97 @@
+.categories {
+  position: relative;
+  width: 100%;
+
+  .left, .right {
+    display: none;
+    position: absolute;
+    top: 10px;
+    cursor: pointer;
+  }
+
+  .left {
+    left: -25px;
+  }
+
+  .right {
+    right: -25px;
+  }
+
+  .container {
+    overflow: hidden;
+
+    .columns {
+      width: auto;
+      overflow: hidden;
+      white-space: nowrap;
+      font-size: 0;
+
+      ul {
+        display: inline-block;
+        box-sizing: border-box;
+        vertical-align: top;
+        white-space: normal;
+        font-size: 16px;
+        color: #fff;
+
+        li {
+          position: relative;
+          padding: 10px 15px;
+
+          &:hover {
+            a.open {
+              display: block;
+            }
+          }
+
+          &:hover, &.active {
+            background-color: #1d1d1d;
+          }
+
+          &.active:hover {
+            background-color: #000;
+          }
+
+          p {
+            display: inline;
+          }
+
+          a.open {
+            display: none;
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            color: #fff;
+            font-size: 24px;
+          }
+        }
+
+        &:nth-child(n) {
+          background-color: $color1;
+        }
+
+        &:nth-child(2n) {
+          background-color: $color2;
+        }
+
+        &:nth-child(3n) {
+          background-color: $color3;
+        }
+
+        &:nth-child(4n) {
+          background-color: $color4;
+        }
+
+        &:last-child {
+          background: #1d1d1d;
+
+          li {
+            &:hover {
+              background-color: #000;
+            }
+          }
+        }
+      }
+    }
+  }
+}

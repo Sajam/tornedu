@@ -35,6 +35,7 @@ class RequestHandler(RequestHandler, Auth):
 
         namespace.update(TemplateFunctions(self).as_dict())
         namespace['messages'] = self.messages.get_all()
+        namespace['reverse_url'] = self.reverse_url
 
         return namespace
 

@@ -1,0 +1,20 @@
+{% extends '../base_frontend.html' %}
+
+{% block header_extra %}
+    <script type="text/javascript" src="{{ static_url('js/categories.js') }}"></script>
+{% end %}
+
+{% block content %}
+    <p class="title">Kategorie</p>
+
+    <div class="categories">
+        <a class="left"><i class="fa fa-arrow-left"></i></a>
+        <a class="right"><i class="fa fa-arrow-right"></i></a>
+
+        <div class="container">
+            <div class="columns">
+                {% raw categories %}
+            </div>
+        </div>
+    </div>
+{% end %}

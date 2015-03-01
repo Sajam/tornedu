@@ -1,0 +1,10 @@
+<ul data-level="0" data-parent-id="">
+    {% for category in categories %}
+        <li data-id="{{ category.id }}">
+            <p>{{ category.name }}</p>
+            <a href="{{ reverse_url('category', category.id) }}" class="open">
+                <i class="fa fa-arrow-circle-o-right"></i>
+            </a>
+        </li>
+    {% end %}
+</ul>
