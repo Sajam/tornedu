@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 import os
 from core.conf import Settings
 from core.utils import import_subclasses

@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+
 class Filters(object):
     @staticmethod
     def strip(value):

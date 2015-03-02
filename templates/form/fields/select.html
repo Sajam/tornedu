@@ -1,5 +1,5 @@
-<div class="field" data-type="checkbox">
-    {% raw field.render() %}
-
+<div class="field" data-type="select">
     <label for="{{ field.id }}">{{ form.labels.get(field.name, field.name) }}</label>
+
+    {% raw field.render() %}
 </div>

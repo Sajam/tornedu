@@ -12,6 +12,7 @@ class User(BaseModel, TimestampMixin):
     password = Column(String(length=32))
     is_admin = Column(Boolean, default=False)
     content = relationship("Content")
+    comments = relationship("Comment")
 
     @before_save('password')
     def obfuscate_password(self):

@@ -1,9 +1,13 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 import types
 from collections import OrderedDict
 from ..field import FormField
 
 
 class SelectField(FormField):
+    template = 'fields/select.html'
+
     def __init__(self, name, options=None, *args, **kwargs):
         self._options = options
         self._blank = kwargs.get('blank')

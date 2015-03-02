@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from collections import defaultdict
 import os
 from compiler.ast import flatten

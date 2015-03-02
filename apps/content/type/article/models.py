@@ -8,7 +8,7 @@ class Article(Content):
     __display_name__ = 'Artykuł'
 
     id = Column(Integer, ForeignKey('content.id'), primary_key=True)
-    content = Column(Text)
+    content = Column(UnicodeText)
 
     __mapper_args__ = {
         'polymorphic_identity': 'article',

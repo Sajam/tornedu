@@ -15,6 +15,18 @@ p {
   margin: 0;
   padding: 0; }
 
+.silhouette {
+  float: left;
+  position: relative;
+  width: 50px;
+  height: 50px; }
+  .silhouette img {
+    position: absolute;
+    top: 15%;
+    width: 70%;
+    height: 70%;
+    border-radius: 50px; }
+
 header {
   position: relative;
   height: 50px;
@@ -70,17 +82,6 @@ header {
     width: 200px; }
     header .user.popover-open {
       background: #A3A948; }
-    header .user .silhouette {
-      float: left;
-      position: relative;
-      width: 50px;
-      height: 50px; }
-      header .user .silhouette img {
-        position: absolute;
-        top: 15%;
-        width: 70%;
-        height: 70%;
-        border-radius: 50px; }
     header .user p.name {
       float: left;
       color: #fff;
@@ -133,6 +134,16 @@ header {
     border-bottom: 1px solid #A3A948;
     margin: 15px auto; }
 
+.item {
+  overflow: hidden;
+  width: 100%; }
+  .item .text {
+    float: left;
+    width: 66%; }
+  .item .sidebar {
+    float: left;
+    width: calc(100% - 66%); }
+
 form {
   width: 400px;
   display: inline-block;
@@ -147,13 +158,21 @@ form {
       display: inline; }
       form .row .field[data-type="checkbox"] label:after {
         content: ""; }
+    form .row .field[data-type="select"] select {
+      margin: 0;
+      padding: 5px 10px;
+      outline: none;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      width: 100%;
+      background-color: #fff; }
     form .row label {
       display: block;
       margin-bottom: 5px;
       font-size: 14px; }
       form .row label:after {
         content: ":"; }
-    form .row input[type="text"], form .row input[type="password"] {
+    form .row input[type="text"], form .row input[type="password"], form .row textarea {
       margin: 0;
       padding: 5px 10px;
       outline: none;
@@ -248,6 +267,32 @@ ul.models li {
     ul.models li a i {
       padding-right: 10px; }
 
+table.admin {
+  border-spacing: 0;
+  border-collapse: collapse; }
+  table.admin thead tr th {
+    color: #fff;
+    font-size: 14px;
+    border-bottom: 2px solid #CE1836;
+    border-right: 1px solid #eee;
+    padding: 7px 10px;
+    text-align: left;
+    background: #F85931; }
+  table.admin tbody tr:nth-child(2n) {
+    background: #feffd3; }
+  table.admin tbody tr td {
+    border-bottom: 1px solid #eee;
+    padding: 5px 10px;
+    font-size: 14px; }
+    table.admin tbody tr td.actions a {
+      margin-right: 10px; }
+      table.admin tbody tr td.actions a:last-child {
+        margin-right: 0; }
+    table.admin tbody tr td.actions .edit {
+      color: #009989; }
+    table.admin tbody tr td.actions .delete {
+      color: #b10f24; }
+
 footer {
   background-color: #009989;
   margin-top: 20px;
@@ -311,5 +356,32 @@ footer {
           background: #1d1d1d; }
           .categories .container .columns ul:last-child li:hover {
             background-color: #000; }
+
+.comments ul {
+  overflow: hidden;
+  margin-bottom: 30px; }
+  .comments ul li {
+    position: relative; }
+    .comments ul li .meta {
+      overflow: hidden; }
+      .comments ul li .meta .username-and-date {
+        float: left;
+        line-height: 40px; }
+        .comments ul li .meta .username-and-date .username {
+          font-weight: bold; }
+        .comments ul li .meta .username-and-date .date {
+          color: #C3C3C3; }
+    .comments ul li .comment-text {
+      margin-left: 52px;
+      margin-top: -15px;
+      font-size: 14px; }
+
+form.comment {
+  border: none;
+  width: 99%;
+  margin: 0;
+  padding: 0; }
+  form.comment input[type="submit"] {
+    margin-top: 0; }
 
 /*# sourceMappingURL=style.css.map */

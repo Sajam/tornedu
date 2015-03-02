@@ -3,20 +3,29 @@
 {% block content %}
     <p class="title">Zarządzaj obiektami - {{ model.display_name }}</p>
 
-    <table>
+    <table class="admin">
         <thead>
             <tr>
                 {% for field in fields %}
-                    <th>{{ field.name }}</th>
+                    <th>{{ field }}</th>
                 {% end %}
+                <th>Akcje</th>
             </tr>
         </thead>
         <tbody>
             {% for row in rows %}
                 <tr>
                     {% for field in fields %}
-                        <td>{{ getattr(row, field.name) }}</td>
+                        <td>{{ str(getattr(row, field)) }}</td>
                     {% end %}
+                    <td class="actions">
+                        <a href="#" class="edit">
+                            <i class="fa fa-edit"></i> Edycja
+                        </a>
+                        <a href="#" class="delete">
+                            <i class="fa fa-times-circle"></i> Usuń
+                        </a>
+                    </td>
                 </tr>
             {% end %}
         </tbody>

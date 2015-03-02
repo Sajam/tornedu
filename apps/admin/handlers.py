@@ -27,7 +27,7 @@ class ObjectsListHandler(AdminRequestHandler):
 
     def get(self, model_name):
         model = AdminUtils.models[model_name]
-        fields = model.fields()
+        fields = [column.name for column in model.__mapper__.columns if column.name not in ('password', )]
         rows = model.query().all()
 
         self.render(self.template, model=model, fields=fields, rows=rows)

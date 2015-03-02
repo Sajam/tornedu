@@ -24,3 +24,54 @@ ul.models {
     }
   }
 }
+
+table.admin {
+  border-spacing: 0;
+  border-collapse: collapse;
+
+  thead {
+    tr {
+      th {
+        color: #fff;
+        font-size: 14px;
+        border-bottom: 2px solid $color1;
+        border-right: 1px solid #eee;
+        padding: 7px 10px;
+        text-align: left;
+        background: $color2;
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      &:nth-child(2n) {
+        background: rgb(254, 255, 211);
+      }
+
+      td {
+        border-bottom: 1px solid #eee;
+        padding: 5px 10px;
+        font-size: 14px;
+
+        &.actions {
+          a {
+            margin-right: 10px;
+
+            &:last-child {
+              margin-right: 0;
+            }
+          }
+
+          .edit {
+            color: $themeBlue;
+          }
+
+          .delete {
+            color: #b10f24;
+          }
+        }
+      }
+    }
+  }
+}

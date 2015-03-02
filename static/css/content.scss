@@ -25,3 +25,19 @@
     margin: 15px auto;
   }
 }
+
+// Content item of specific type.
+.item {
+  overflow: hidden;
+  width: 100%;
+
+  .text {
+    float: left;
+    width: 66%;
+  }
+
+  .sidebar {
+    float: left;
+    width: calc(100% - 66%);
+  }
+}

@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 import os
 from core.conf import Settings
 from core.model import BaseModel
@@ -37,7 +39,7 @@ class ManagementCommandDatabase(ManagementCommand):
 
     @ManagementCommand.action('import_data', 'data')
     def import_data(self):
-        sql = open(os.path.join(Settings.BASE_PATH, 'misc/basic.sql'), mode='r').read()
+        sql = open(os.path.join(Settings.BASE_PATH, 'misc/basic.sql'), mode='r').read().decode('string-escape').decode("utf-8")
 
         self.session.execute(sql)
         self.session.commit()

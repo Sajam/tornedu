@@ -48,6 +48,7 @@ APPS = [
     'user',
     'category',
     'content',
+    'comment',
 ]
 
 # Main project directory.

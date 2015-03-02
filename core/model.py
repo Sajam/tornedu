@@ -1,4 +1,7 @@
-from sqlalchemy import Column, Boolean, Integer, String, Text, DateTime, Interval, Enum, ForeignKey, func
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+from sqlalchemy import (Column, Boolean, Integer, String, Unicode, Text, UnicodeText, DateTime, Interval, Enum,
+                        ForeignKey, func)
 from sqlalchemy.ext.declarative import declared_attr, declarative_base
 from sqlalchemy.orm.exc import MultipleResultsFound, NoResultFound
 from sqlalchemy.orm import relationship
@@ -66,6 +69,11 @@ class SQLExtensions(object):
 
 class BaseModel(SQLExtensions):
     db_session = None
+
+    __table_args__ = {
+        'mysql_engine': 'InnoDB',
+        'mysql_charset': 'utf8'
+    }
 
     @declared_attr
     def __tablename__(cls):

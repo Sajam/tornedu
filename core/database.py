@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from sqlalchemy import create_engine, event
 from sqlalchemy.engine.url import URL
 from sqlalchemy.orm import sessionmaker
@@ -34,6 +36,7 @@ class Database(object):
             **dict((k, connection_settings.get(k)) for k in ('username', 'password', 'host', 'port', 'database', 'query'))
         )
 
+        print connection_settings.get('options', {})
         self.engine = create_engine(url, **connection_settings.get('options', {}))
         self.session.configure(bind=self.engine)
 

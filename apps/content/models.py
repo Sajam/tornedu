@@ -12,7 +12,9 @@ class Content(BaseModel, TimestampMixin):
     user = Column(ForeignKey('user.id'))
     category = Column(ForeignKey('category.id'))
     name = Column(String(length=255))
+    visible = Column(Boolean, default=False)
     views = Column(Integer, default=0)
+    comments = relationship("Comment")
 
     __mapper_args__ = {
         'polymorphic_identity': 'content',

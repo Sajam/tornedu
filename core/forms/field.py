@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from compiler.ast import flatten
 from bs4 import BeautifulSoup
 from tornado.template import Loader
@@ -60,7 +62,7 @@ class FormField(object):
             field=self
         ))
 
-        for field_html in html.find_all('input'):
+        for field_html in html.find_all('input') + html.find_all('select') + html.find_all('textarea'):
             field_html['id'] = self.id
 
         return html

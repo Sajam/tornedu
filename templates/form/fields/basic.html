@@ -1,6 +1,4 @@
-<label for="{{ field.id }}">
-    {{ form.labels.get(field.name, field.name) }}
-</label>
+<label for="{{ field.id }}">{{ form.labels.get(field.name, field.name) }}</label>
 
 <div class="field">
     {% raw field.render() %}

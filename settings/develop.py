@@ -14,8 +14,13 @@ DATABASES['default'] = {
     'password': 'LCA8PKx5nuUjWJUJ',
     'host': 'localhost',
     'database': 'tornedu',
+    'query': {
+        'use_unicode': 0,
+        'charset': 'utf8',
+    },
     'options': {
         # http://docs.sqlalchemy.org/en/rel_0_9/dialects/mysql.html#connection-timeouts
         'pool_recycle': 3600,
+        'encoding': 'utf-8',
     }
 }

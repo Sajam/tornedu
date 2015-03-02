@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+
 class TemplateFunctions(object):
     def __init__(self, request):
         self.request = request

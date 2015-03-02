@@ -3,6 +3,7 @@
 from core.web import RequestHandler, authenticated, ajax
 from .forms import ContentForm, content_types_forms
 from .models import Content, content_types
+from apps.comment.handlers import comments_view
 
 
 class CreateContent(RequestHandler):
@@ -37,6 +38,8 @@ class CreateContent(RequestHandler):
             content_type_model = content_types[content_type]
             content_type_entry = content_type_model(**self.posted_model_fields(content_type_model))
             content_type_entry.user = self.current_user.id
+            if self.current_user.is_admin:
+                content_type_entry.visible = True
             content_type_entry.save()
 
             self.messages.success('Treść dodana poprawnie!')
@@ -61,7 +64,14 @@ class ContentView(RequestHandler):
 
     def get(self, id):
         content = Content.get(Content.id == id)
-        content.views += 1
-        content.save()
+        if (self.current_user and self.current_user.is_admin) or content.visible:
+            content.views += 1
+            content.save()
 
-        self.render(self.template, content=content)
+            self.render(
+                self.template,
+                content=content,
+                comments=comments_view(self, content)
+            )
+        else:
+            self.messages.info('Wybrana treść jest ukryta.')

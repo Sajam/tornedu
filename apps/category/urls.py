@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from tornado.web import URLSpec
 from .admin import CategoriesAdminHandler, CategoryAddHandler, CategoryDeleteHandler, CategoryEditHandler
 from .handlers import Categories, CategoryLevel, CategoryHandler

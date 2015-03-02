@@ -3,5 +3,12 @@
 {% block content %}
     <p class="title">{{ content.name }}</p>
 
-    {{ content.content }}
+    <div class="item">
+        <div class="text">
+            {{ content.content }}
+        </div>
+        <div class="sidebar">
+            {% raw comments %}
+        </div>
+    </div>
 {% end %}

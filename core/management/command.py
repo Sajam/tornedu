@@ -1,6 +1,22 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 import types
 
 
+# Example command:
+#
+# #!/usr/bin/env python
+# # -*- coding: utf-8 -*-
+# from core.management.command import ManagementCommand
+#
+#
+# class ManagementCommandApp(ManagementCommand):
+#     command = ('foo', 'fooo', )
+#     description = 'example management command'
+#
+#     @ManagementCommand.action('bar', 'baar')
+#     def bar(self):
+#         print 'Nothing to do.'
 class ManagementCommand(object):
     command = NotImplementedError()
     description = None
