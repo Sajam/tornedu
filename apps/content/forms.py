@@ -37,13 +37,15 @@ class ContentForm(Form):
         ]),
         TextField('name', validators=[
             RequiredValidator, LengthValidator(min=3, max=255)
-        ])
+        ]),
+        FileField('image')
     ]
 
     labels = {
         'type': 'Typ treści',
         'category': 'Kategoria',
-        'name': 'Nazwa (tytuł) dla treści'
+        'name': 'Nazwa (tytuł) dla treści',
+        'image': 'Obraz'
     }
 
 

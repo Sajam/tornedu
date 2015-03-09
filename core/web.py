@@ -66,6 +66,14 @@ class RequestHandler(RequestHandler, Auth):
 
         return super(RequestHandler, self).reverse_url(name, *args)
 
+    @property
+    def submitted_data(self):
+        data = {}
+        data.update(self.request.body_arguments)
+        data.update(self.request.files)
+
+        return data
+
     # Return all POST fields for specified model (but only relevant eg. no id or created_at).
     def posted_model_fields(self, model):
         return {

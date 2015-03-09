@@ -16,30 +16,31 @@ class CreateContent(RequestHandler):
     @authenticated
     def post(self):
         content_type = self.get_argument('type', None)
-        content_form = ContentForm(self.request.body_arguments)
+        content_form = ContentForm(self.submitted_data)
         content_type_form = None
         errors = []
 
         if not content_form.validate():
             errors += content_form.errors
-        else:
-            content_form.clear()
 
         if content_type and content_type in content_types:
             content_type_form = content_types_forms[content_type](self.request.body_arguments)
             if not content_type_form.validate():
                 errors += content_type_form.errors
-            else:
-                content_type_form.clear()
 
         if errors:
             self.messages.error(errors)
         else:
+            content_form.clear()
+            content_type_form.clear()
+
             content_type_model = content_types[content_type]
             content_type_entry = content_type_model(**self.posted_model_fields(content_type_model))
             content_type_entry.user = self.current_user.id
+
             if self.current_user.is_admin:
                 content_type_entry.visible = True
+
             content_type_entry.save()
 
             self.messages.success('Treść dodana poprawnie!')

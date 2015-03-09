@@ -25,7 +25,7 @@ $(function () {
         if (initialTypeChange && selectedType !== value) {
             initialTypeChange = false;
             changeType(value);
-        } else if (value !== selectedType) {
+        } else if (value !== selectedType && value.length) {
             if (confirm('Czy jesteś pewien, że chcesz zmienić typ treści? ' +
                         'Dotychczasowe zmiany wprowadzone dla aktualnie wybranego typu zostaną utracone.')) {
                 changeType(value);
